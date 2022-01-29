@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>cardlist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+  </head>
+  <body>
+    <section>
+      <!-- where cards appear -->
+    </section>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script type="text/javascript" src="./src/json2cards.js"></script>
+
+    <script type="text/javascript">
+
+      const section = document.querySelector('section');
+
+      // request json
+      // let requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+      let requestURL = './data/NEO.json';
+      // let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
+      let request = new XMLHttpRequest();
+      request.open('GET', requestURL);
+      request.responseType = 'json';
+      request.send();
+
+      request.onload = function() {
+        const cardJson = request.response["data"]["cards"];
+        jsonToCards(cardJson);
+        console.log(cardJson);
+      }
+
+    </script>
+
+  </body>
+</html>
