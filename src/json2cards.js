@@ -1,4 +1,7 @@
 function jsonToCards(cardJson){
+  // listElement = document.createElement('ul');
+  // listElement.id = 'cardlist';
+
   // for (let i = 0; i < cardJson.length; i++) {
   for (let i = 0; i < 30; i++) {
     card = cardJson[i];
@@ -10,28 +13,32 @@ function jsonToCards(cardJson){
       continue;
     }
 
-    const articleElement = document.createElement('article');
+    // const articleElement = document.createElement('li');
+    const articleElement = document.createElement('div');
     const h2Element = document.createElement('h2');
     const p1Element = document.createElement('p');
     const p2Element = document.createElement('p');
     const hrefImgElement = document.createElement('a');
     const img1Element = document.createElement('img');
 
-    h2Element.textContent = card.name;
-    p1Element.textContent = 'manaCost: ' + card.manaCost;
-    p2Element.textContent = 'type: ' + card.type;
+    articleElement.className = 'card_article';
+    // h2Element.textContent = card.name;
+    // p1Element.textContent = 'manaCost: ' + card.manaCost;
+    // p2Element.textContent = 'type: ' + card.type;
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
-    hrefImgElement.dataset.lightbox="abc";
+    hrefImgElement.dataset.lightbox = card.printings[0];
     img1Element.src = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
-    img1Element.width = 100; // 横サイズ（px）
+    img1Element.width = 150; // 横サイズ（px）
 
-    articleElement.appendChild(h2Element);
-    articleElement.appendChild(p1Element);
-    articleElement.appendChild(p2Element);
+    // articleElement.appendChild(h2Element);
+    // articleElement.appendChild(p1Element);
+    // articleElement.appendChild(p2Element);
     articleElement.appendChild(hrefImgElement);
     hrefImgElement.appendChild(img1Element);
 
     section.appendChild(articleElement);
+    // listElement.appendChild(articleElement);
+    // section.appendChild(listElement);
     console.log(i)
 
   }
