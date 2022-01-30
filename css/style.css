@@ -17,10 +17,22 @@ article{
   flex: auto;
 }
 
-.side{
-  width: 0;
+#wrapper{
+  /* position: relative; */
 }
 
-.open-menu{
-  width: 100%;
+.side{
+  background-color: yellow;
+  position:absolute;
+  white-space: nowrap;
+  /* position: -webkit-sticky;
+  position: sticky; */
+  /* position: fixed; */
+
+  /* transform: translateX(-50%) translateY(-50%); */
 }
+
+/* .open-menu{
+  left: 100px;
+  /* width: 100%; */
+} */

@@ -7,6 +7,7 @@ function jsonToCards(cardJson){
   let backfaces = {};
   let faceUuidToId = {};
   for (let i = 0; i < cardJson.length; i++) {
+  // for (let i = 0; i < 30; i++) {
     card = cardJson[i];
     // skip back face of double faced cards
     // if (card.keywords) {
@@ -31,9 +32,6 @@ function jsonToCards(cardJson){
     divCardElement.setAttribute('ondragstart', 'dragstart(event)');
 
     hrefImgElement.id = card.identifiers.scryfallId;
-    // hrefImgElement.draggable = 'true';
-    // hrefImgElement.setAttribute('ondragstart', 'dragstart(event)');
-    // card visualization
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
     hrefImgElement.dataset.lightbox = `card_${card.identifiers.scryfallId}`;
     hrefImgElement.dataset.title = card.name;
@@ -41,11 +39,12 @@ function jsonToCards(cardJson){
     img1Element.src = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
     img1Element.width = 150;
     img1Element.id = hrefImgElement.id; // use same id to make parent draggable
-    // img1Element.setAttribute('ondragstart', 'dragover(event)');
+
     // hidden card parameters
     hrefImgElement.dataset.c_name = card.name;
     hrefImgElement.dataset.c_manacost = card.manaCost;
     hrefImgElement.dataset.c_type = card.type;
+    hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
     // pt does not refer back side now
     if (card.power) hrefImgElement.dataset.c_power = card.power;
     if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
