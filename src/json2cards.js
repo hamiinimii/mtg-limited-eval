@@ -3,8 +3,8 @@ function jsonToCards(cardJson){
   // listElement.id = 'cardlist';
   const divNotRankedElement = document.querySelector('#tier4 > div');
 
-  // for (let i = 0; i < cardJson.length; i++) {
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < cardJson.length; i++) {
+  // for (let i = 0; i < 30; i++) {
     card = cardJson[i];
     // skip back face of double faced cards
     // if (card.keywords) {
