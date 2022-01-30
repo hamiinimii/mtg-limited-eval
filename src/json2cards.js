@@ -6,8 +6,8 @@ function jsonToCards(cardJson){
   //store back faces of double face card
   let backfaces = {};
   let faceUuidToId = {};
-  for (let i = 0; i < cardJson.length; i++) {
-  // for (let i = 0; i < 30; i++) {
+  // for (let i = 0; i < cardJson.length; i++) {
+  for (let i = 0; i < 30; i++) { // for local testing
     card = cardJson[i];
     // skip back face of double faced cards
     // if (card.keywords) {
