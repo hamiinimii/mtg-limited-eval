@@ -5,18 +5,24 @@
     <title>cardlist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <link rel="stylesheet" href="./css/style.css">
-  </head>
-  <body>
-    <section>
-      <!-- where cards appear -->
-    </section>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script type="text/javascript" src="./src/dragdrop.js"></script>
     <script type="text/javascript" src="./src/json2cards.js"></script>
+  </head>
+  <body>
+    <!-- where cards appear -->
+    <section class="area" id="tier1">
+      <p>unranked</p>
+      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+    </section>
+    <section class="area" id="unranked">
+      <!-- <p>unranked</p> -->
+      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+    </section>
+
 
     <script type="text/javascript">
-
-      const section = document.querySelector('section');
 
       // request json
       // let requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';

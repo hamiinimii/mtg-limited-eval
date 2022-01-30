@@ -1,3 +1,27 @@
 .card_article {
-  float: left;
+  /* float: left; */
+  /* padding: 10px; */
+}
+
+#tier1 {
+  background-color: blue;
+}
+
+#unranked {
+  /* padding: 10px; */
+  background-color: red;
+}
+
+.area {
+  border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
+}
+
+.cards{
+  padding: 20px 25px;
+  /* margin: 50px 30px 20px 50px; */
+  -khtml-user-drag: element;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex: auto;
 }
