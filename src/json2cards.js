@@ -14,15 +14,8 @@ function jsonToCards(cardJson){
       continue;
     }
 
-    // const divCardElement = document.createElement('li');
-    // let divCardElement = document.createElement('div');
     const hrefImgElement = document.createElement('a');
     const img1Element = document.createElement('img');
-
-    // divCardElement.className = 'card_div';
-    // divCardElement.id = card.identifiers.scryfallId;
-    // divCardElement.draggable = 'true';
-    // divCardElement.setAttribute('ondragstart', 'dragstart(event)');
 
     hrefImgElement.id = card.identifiers.scryfallId;
     hrefImgElement.draggable = 'true';

@@ -1,6 +1,5 @@
-.card_article {
-  /* float: left; */
-  /* padding: 10px; */
+article{
+  display: flex;
 }
 
 
@@ -16,4 +15,12 @@
   display: flex;
   flex-wrap: wrap;
   flex: auto;
+}
+
+.side{
+  width: 0;
+}
+
+.open-menu{
+  width: 100%;
 }

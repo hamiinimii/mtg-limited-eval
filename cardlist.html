@@ -11,32 +11,43 @@
     <script type="text/javascript" src="./src/json2cards.js"></script>
   </head>
   <body>
-    <!-- where cards appear -->
-    <section class="area" id="tier1" style="background-color: blue">
-      <p>Tier 1: Incredible Bombs</p>
-      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
-    </section>
-    <section class="area" id="tier2" style="background-color: green">
-      <p>Tier 2: Great First Picks</p>
-      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
-    </section>
-    <section class="area" id="tier3" style="background-color: red">
-      <p>Tier 3: Above Average Cards</p>
-      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
-    </section>
-    <section class="area" id="tier4" style="background-color: yellow">
-      <p>Tier 4: Solid Playables</p>
-      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
-    </section>
-    <section class="area" id="tier5" style="background-color: purple">
-      <p>Tier 5: Sometimes Playable</p>
-      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
-    </section>
-    <section class="area" id="tier6" style="background-color: gray">
-      <p>Tier 6: Rarely Playable or Basically Unplayable</p>
-      <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
-    </section>
+    <button type="button" name="menu" class="btn_menu">menu</button>
+    <article>
+      <!-- side menu to change parameters -->
+      <div class="side">
+        <p>sidebar</p>
+      </div>
+      <script type="text/javascript" src="./src/sidemenu.js"></script>
 
+      <div class="contents">
+        <!-- where cards appear -->
+        <section class="area" id="tier1" style="background-color: blue">
+          <p>Tier 1: Incredible Bombs</p>
+          <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+        </section>
+        <section class="area" id="tier2" style="background-color: green">
+          <p>Tier 2: Great First Picks</p>
+          <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+        </section>
+        <section class="area" id="tier3" style="background-color: red">
+          <p>Tier 3: Above Average Cards</p>
+          <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+        </section>
+        <section class="area" id="tier4" style="background-color: yellow">
+          <p>Tier 4: Solid Playables</p>
+          <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+        </section>
+        <section class="area" id="tier5" style="background-color: purple">
+          <p>Tier 5: Sometimes Playable</p>
+          <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+        </section>
+        <section class="area" id="tier6" style="background-color: gray">
+          <p>Tier 6: Rarely Playable or Basically Unplayable</p>
+          <div class="cards" ondrop="drop(event)" ondragover="dragover(event)"></div>
+        </section>
+
+      </div>
+    </article>
 
     <script type="text/javascript">
 
