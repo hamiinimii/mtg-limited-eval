@@ -3,14 +3,6 @@
   /* padding: 10px; */
 }
 
-#tier1 {
-  background-color: blue;
-}
-
-#unranked {
-  /* padding: 10px; */
-  background-color: red;
-}
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
