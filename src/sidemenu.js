@@ -6,18 +6,17 @@ $('.btn_menu').on('click', () => {
 
 // trigger color filtering
  $('input:checkbox.colorcheck').change(colorchange);
+ $('input:checkbox.raritycheck').change(raritychange);
 
 
  // color filtering function
  function colorchange(){
+   let visible = false;
+   let color = '';
    $('.card_div').each(function(i, o){
-     // let color = $(o).children('a').attr('data-c_color');
-     let color = $(o).children('a').attr('data-c_color').replace(/,/g, '');
-     console.log(color);
-     let visible = false;
+     color = $(o).children('a').attr('data-c_color').replace(/,/g, '');
+     visible = false;
      for (let i = 0; i < color.length; i++){
-       // console.log($('.'+color[i]).prop('checked'));
-       // if ($('colorcheck' + color[i]).prop('checked')!=false){
        if ($('.'+color[i]).prop('checked')==true){
          $(o).show();
          visible = true;
@@ -27,7 +26,20 @@ $('.btn_menu').on('click', () => {
      if (!visible){
        $(o).hide();
      }
-     // console.log(o.attr('data-c_color'));
    })
-   console.log("color change!");
+ }
+
+ // rarity filtering function
+ function raritychange(){
+   let visible = false;
+   let rarity = '';
+   $('.card_div').each(function(i, o){
+     rarity = $(o).children('a').attr('data-c_rarity');
+     console.log(rarity);
+       if ($('.'+rarity).prop('checked')==true){
+         $(o).show();
+       } else {
+         $(o).hide();
+       }
+     })
  }

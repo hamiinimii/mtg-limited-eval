@@ -17,6 +17,10 @@ article{
   flex: auto;
 }
 
+.conditions{
+  display: flex;
+}
+
 #wrapper{
   /* position: relative; */
 }

@@ -45,6 +45,7 @@ function jsonToCards(cardJson){
     hrefImgElement.dataset.c_manacost = card.manaCost;
     hrefImgElement.dataset.c_type = card.type;
     hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
+    hrefImgElement.dataset.c_rarity = card.rarity;
     // pt does not refer back side now
     if (card.power) hrefImgElement.dataset.c_power = card.power;
     if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
