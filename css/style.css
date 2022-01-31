@@ -26,7 +26,8 @@ article{
 }
 
 .side{
-  background-color: yellow;
+  background-color: brown;
+  color: white;
   position:absolute;
   white-space: nowrap;
   /* position: -webkit-sticky;
@@ -36,7 +37,6 @@ article{
   /* transform: translateX(-50%) translateY(-50%); */
 }
 
-/* .open-menu{
-  left: 100px;
-  /* width: 100%; */
-} */
+.tiertext{
+  text-align: right;
+}
