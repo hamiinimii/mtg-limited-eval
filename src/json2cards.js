@@ -1,14 +1,61 @@
+let cards_tier = {};
+
+// cookie management - reference: https://into-the-program.com/javascript-set-get-data-array-cookie/
+function loadCookie(){
+  let cookies = '';
+  let cookie_array = new Array();
+  let result = new Array();
+
+  cookies = document.cookie;
+  if(cookies){
+    cookie_array = cookies.split(';');
+
+    cookie_array.forEach(data => {
+        data = data.split('=');
+        //data[0]: Cookieの名前（例では「user」）
+        //data[1]: Cookieの値（例では「json」）
+        result[data[0]] = JSON.parse(data[1]);
+    });
+  }
+  return result;
+}
+
+function saveCookie(name, object){
+  let cookies = '';
+  let expire = '';
+  let period = '';
+
+  //Cookieの保存名と値を指定
+  cookies = name + '=' + JSON.stringify(object) + ';';
+
+  //Cookieを保存するパスを指定
+  cookies += 'path=/ ;';
+
+  //Cookieを保存する期間を指定
+  period = 30; //保存日数
+  expire = new Date();
+  expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
+  expire.toUTCString();
+  cookies += 'expires=' + expire + ';';
+
+  //Cookieを保存する
+  document.cookie = cookies;
+}
+
 function jsonToCards(cardJson){
-  // listElement = document.createElement('ul');
-  // listElement.id = 'cardlist';
-  const divNotRankedElement = document.querySelector('#tier4 > div');
+  const divNotRankedElement = document.querySelector('#area_untiered > div');
+
+  // load tier from cookie
+  cards_tier = loadCookie();
 
   //store back faces of double face card
   let backfaces = {};
   let faceUuidToId = {};
+
+  // loop for all cards (including back face)
   for (let i = 0; i < cardJson.length; i++) {
   // for (let i = 0; i < 30; i++) {
-    card = cardJson[i];
+    let card = cardJson[i];
 
     let divCardElement = document.createElement('div');
     const hrefImgElement = document.createElement('a');
@@ -31,24 +78,23 @@ function jsonToCards(cardJson){
       hrefImgElement.dataset.title = card.name;
     }
 
+    let card_id = card.identifiers.scryfallId;
 
     divCardElement.className = 'card_div';
-    divCardElement.id = card.identifiers.scryfallId;
+    divCardElement.id = card_id;
     divCardElement.draggable = 'true';
     divCardElement.setAttribute('ondragstart', 'dragstart(event)');
 
-    hrefImgElement.id = card.identifiers.scryfallId;
-    hrefImgElement.href = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
-    hrefImgElement.dataset.lightbox = `card_${card.identifiers.scryfallId}`;
+    hrefImgElement.id = card_id; // use same id to make parent draggable
+    hrefImgElement.href = 'https://api.scryfall.com/cards/' + card_id + '?format=image&face=front';
+    hrefImgElement.dataset.lightbox = `card_${card_id}`;
     hrefImgElement.dataset.c_face = 'front';
 
-    // img1Element.src = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
     img1Element.src = hrefImgElement.href;
     img1Element.width = 150;
-    img1Element.id = hrefImgElement.id; // use same id to make parent draggable
+    img1Element.id = card_id // use same id to make parent draggable
 
     // hidden card parameters
-    // hrefImgElement.dataset.c_name = card.name;
     hrefImgElement.dataset.c_manacost = card.manaCost;
     hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
     hrefImgElement.dataset.c_rarity = card.rarity;
@@ -60,13 +106,16 @@ function jsonToCards(cardJson){
     divCardElement.appendChild(hrefImgElement);
     hrefImgElement.appendChild(img1Element);
 
+    // check tier
+    if (!(card_id in cards_tier)){
+      cards_tier[card_id] = "untiered";
+    }
+
     divNotRankedElement.appendChild(divCardElement);
-    // console.log(i)
 
   }
-  console.log(backfaces)
-  console.log(faceUuidToId)
-  // backface of transform cards
+
+  // make elements for backface of transform cards
   for (let [id, data] of Object.entries(backfaces)) {
     let back_id = id;
     let face_id = faceUuidToId[data.otherFaceIds.at(0)];
