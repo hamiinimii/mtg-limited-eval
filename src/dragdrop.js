@@ -11,8 +11,10 @@ function drop(event){
   event.preventDefault(); // cancel drop event in order to avoid error
 
   // save tier data (refer to json2cards.js)
-  console.log(cards_tier);
-  saveCookie("tier", "object");
+  cards_tier[dragged_id] = event.currentTarget.id.slice(-1);
+  saveCookie("tier", cards_tier); //still dummy
+  console.log(JSON.stringify(cards_tier));
+  console.log(document.cookie);
 }
 
 // if dragged element is over dropped element

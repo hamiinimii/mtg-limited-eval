@@ -4,7 +4,7 @@ let cards_tier = {};
 function loadCookie(){
   let cookies = '';
   let cookie_array = new Array();
-  let result = new Array();
+  let result = {};
 
   cookies = document.cookie;
   if(cookies){
@@ -37,6 +37,7 @@ function saveCookie(name, object){
   expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
   expire.toUTCString();
   cookies += 'expires=' + expire + ';';
+  console.log(cookies);
 
   //Cookieを保存する
   document.cookie = cookies;
@@ -107,7 +108,7 @@ function jsonToCards(cardJson){
     hrefImgElement.appendChild(img1Element);
 
     // check tier
-    if (!(card_id in cards_tier)){
+    if (card_id in cards_tier){
       cards_tier[card_id] = "untiered";
     }
 
