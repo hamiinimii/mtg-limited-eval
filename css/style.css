@@ -1,6 +1,5 @@
-.card_article {
-  /* float: left; */
-  /* padding: 10px; */
+article{
+  display: flex;
 }
 
 
@@ -16,4 +15,32 @@
   display: flex;
   flex-wrap: wrap;
   flex: auto;
+}
+
+.conditions{
+  display: flex;
+}
+
+#wrapper{
+  /* position: relative; */
+}
+
+.side{
+  background-color: brown;
+  color: white;
+  position:absolute;
+  white-space: nowrap;
+  /* position: -webkit-sticky;
+  position: sticky; */
+  /* position: fixed; */
+
+  /* transform: translateX(-50%) translateY(-50%); */
+}
+
+.tiertext{
+  text-align: right;
+}
+
+.variations{
+  display: none;
 }

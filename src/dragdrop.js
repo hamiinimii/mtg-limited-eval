@@ -1,7 +1,5 @@
 // when starting drag
 function dragstart(event){
-  console.log("dragstart");
-  console.log(event)
   event.dataTransfer.setData("text", event.target.id);
 }
 
@@ -9,10 +7,12 @@ function dragstart(event){
 function drop(event){
   var dragged_id = event.dataTransfer.getData("text");
   var drag_elm = document.getElementById(dragged_id);
-  console.log(dragged_id);
-  console.log(drag_elm);
   event.currentTarget.appendChild(drag_elm);
   event.preventDefault(); // cancel drop event in order to avoid error
+
+  // save tier data (refer to json2cards.js)
+  cards_tier[dragged_id] = event.currentTarget.id.slice(-1);
+  saveTier(cards_tier);
 }
 
 // if dragged element is over dropped element
