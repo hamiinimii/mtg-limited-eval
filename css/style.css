@@ -40,3 +40,7 @@ article{
 .tiertext{
   text-align: right;
 }
+
+.variations{
+  display: none;
+}

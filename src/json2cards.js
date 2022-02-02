@@ -29,9 +29,9 @@ function jsonToCards(cardJson){
   cards_tier = loadTier();
   console.log(cards_tier);
 
-  //store back faces of double face card
+  //store data for cards
   let backfaces = {};
-  let faceUuidToId = {};
+  let variations_to_orig = {};
 
   // loop for all cards (including back face)
   for (let i = 0; i < cardJson.length; i++) {
@@ -41,6 +41,13 @@ function jsonToCards(cardJson){
     let divCardElement = document.createElement('div');
     const hrefImgElement = document.createElement('a');
     const img1Element = document.createElement('img');
+
+    // restore data of variations if exist, and skip second or later variations
+    if ('variations' in card && !(card.uuid in variations_to_orig)){ // first variation case
+      for (let var_uuid of card.variations){
+        variations_to_orig[var_uuid] = card.uuid;
+      }
+    }
 
     // restore data of back face of double faced cards
     if (card.layout=='transform') {
@@ -53,28 +60,26 @@ function jsonToCards(cardJson){
         };
         continue;
       } else if(card.side === 'a') {
-        // faceUuidToId[card.uuid] = card.uuid;
         hrefImgElement.dataset.title = card.faceName;
       }
-    } else{
+    }else{
       hrefImgElement.dataset.title = card.name;
     }
 
-    let card_id = card.uuid;
 
     divCardElement.className = 'card_div';
-    divCardElement.id = card_id;
+    divCardElement.id = card.uuid;
     divCardElement.draggable = 'true';
     divCardElement.setAttribute('ondragstart', 'dragstart(event)');
 
-    hrefImgElement.id = card_id; // use same id to make parent draggable
+    hrefImgElement.id = card.uuid; // use same id to make parent draggable
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
-    hrefImgElement.dataset.lightbox = `card_${card_id}`;
+    hrefImgElement.dataset.lightbox = `card_${card.uuid}`;
     hrefImgElement.dataset.c_face = 'front';
 
     img1Element.src = hrefImgElement.href;
     img1Element.width = 150;
-    img1Element.id = card_id // use same id to make parent draggable
+    img1Element.id = card.uuid // use same id to make parent draggable
 
     // hidden card parameters
     hrefImgElement.dataset.c_manacost = card.manaCost;
@@ -89,11 +94,11 @@ function jsonToCards(cardJson){
     hrefImgElement.appendChild(img1Element);
 
     // check tier
-    if (!(card_id in cards_tier)){
-      cards_tier[card_id] = '0';
+    if (!(card.uuid in cards_tier)){
+      cards_tier[card.uuid] = '0';
     }
 
-    let tier_int = parseInt(cards_tier[card_id]);
+    let tier_int = parseInt(cards_tier[card.uuid]);
     tierElements[tier_int].appendChild(divCardElement);
 
   }
@@ -104,11 +109,22 @@ function jsonToCards(cardJson){
     let face_id = data.otherFaceIds.at(0);
     const hrefImgElement = document.createElement('a');
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + data.scryfallId + '?format=image&face=back';
-    hrefImgElement.dataset.lightbox = `card_${face_id}`
+    hrefImgElement.dataset.lightbox = `card_${face_id}`;
     hrefImgElement.dataset.title = data.faceName;
     hrefImgElement.dataset.c_types = data.types;
     hrefImgElement.dataset.c_face = 'back';
     let elm = document.getElementById(face_id);
     elm.appendChild(hrefImgElement);
   }
+
+  for (let [var_uuid, orig_uuid] of Object.entries(variations_to_orig)) {
+    $('[data-lightbox=card_'+var_uuid+']').each(function(i, o){ // append variation images
+      $(o).attr('data-lightbox', 'card_'+orig_uuid);
+    })
+    $('.card_div#'+var_uuid).each(function(i, o){
+      $(o).addClass('variation');
+    })
+
+  }
+
 }

@@ -18,10 +18,10 @@ $('.btn_uncheck').on('click', () => {
 });
 
 // trigger color filtering
- $('.check').change(filterchange);
+ $('.check').change(filterChange);
 
  // color filtering function
- function filterchange(){
+ function filterChange(){
    let visible = [];
    // data variables
    let color = '';
@@ -64,9 +64,11 @@ $('.btn_uncheck').on('click', () => {
        }
      }
      // check rarity
-     // if ($('.'+rarity).prop('checked')==false){
      visible[2] = $('.'+rarity).prop('checked');
-     // }
+
+     // if variation card, hide it
+     visible[3] = !($(o).hasClass('variation'));
+
      // result
      if (visible.every(value => value==true)){
        $(o).show();
