@@ -1,53 +1,58 @@
 let cards_tier = {};
 
-// cookie management - reference: https://into-the-program.com/javascript-set-get-data-array-cookie/
-function loadCookie(){
-  let cookies = '';
+
+function loadTier(){
+  let tiers = '';
   let cookie_array = new Array();
   let result = {};
 
-  cookies = document.cookie;
-  if(cookies){
-    cookie_array = cookies.split(';');
-
-    cookie_array.forEach(data => {
-        data = data.split('=');
-        //data[0]: Cookieの名前（例では「user」）
-        //data[1]: Cookieの値（例では「json」）
-        result[data[0]] = JSON.parse(data[1]);
-    });
+  if (localStorage.tiers){
+    tiers = JSON.parse(localStorage.tiers);
+  }else{
+    tiers = {};
   }
-  return result;
+
+  return tiers;
+  // if(tiers){
+  //   cookie_array = tiers.split(';');
+  //
+  //   cookie_array.forEach(data => {
+  //       data = data.split('=');
+  //       //data[0]: Cookieの名前（例では「user」）
+  //       //data[1]: Cookieの値（例では「json」）
+  //       result[data[0]] = JSON.parse(data[1]);
+  //   });
+  // }
+  // return result;
 }
 
-function saveCookie(name, object){
-  let cookies = '';
-  let expire = '';
-  let period = '';
-
-  //Cookieの保存名と値を指定
-  cookies = name + '=' + JSON.stringify(object) + ';';
-
-  //Cookieを保存するパスを指定
-  cookies += 'path=/ ;';
-
-  //Cookieを保存する期間を指定
-  period = 30; //保存日数
-  expire = new Date();
-  expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
-  expire.toUTCString();
-  cookies += 'expires=' + expire + ';';
-  console.log(cookies);
-
-  //Cookieを保存する
-  document.cookie = cookies;
+function saveTier(object){
+  let tiers = JSON.stringify(object);
+  localStorage.tiers = tiers;
 }
 
 function jsonToCards(cardJson){
-  const divNotRankedElement = document.querySelector('#area_untiered > div');
+  const divUntieredElement = document.querySelector('#area_untiered > div');
+  const divTier1Element = document.querySelector('#area_tier1 > div');
+  const divTier2Element = document.querySelector('#area_tier2 > div');
+  const divTier3Element = document.querySelector('#area_tier3 > div');
+  const divTier4Element = document.querySelector('#area_tier4 > div');
+  const divTier5Element = document.querySelector('#area_tier5 > div');
+  const divTier6Element = document.querySelector('#area_tier6 > div');
 
-  // load tier from cookie
-  cards_tier = loadCookie();
+  const tierElements = [
+    divUntieredElement,
+    divTier1Element,
+    divTier2Element,
+    divTier3Element,
+    divTier4Element,
+    divTier5Element,
+    divTier6Element
+  ];
+
+  // load tier from localStorage
+  cards_tier = loadTier();
+  console.log(cards_tier);
 
   //store back faces of double face card
   let backfaces = {};
@@ -108,11 +113,18 @@ function jsonToCards(cardJson){
     hrefImgElement.appendChild(img1Element);
 
     // check tier
-    if (card_id in cards_tier){
+    if (!(card_id in cards_tier)){
       cards_tier[card_id] = "untiered";
     }
 
-    divNotRankedElement.appendChild(divCardElement);
+
+    if (cards_tier[card_id]=="untiered"){
+      tierElements[0].appendChild(divCardElement);
+    }else{
+      let tier_int = parseInt(cards_tier[card_id]);
+      tierElements[tier_int].appendChild(divCardElement);
+      // console.log("end of json2cards but tiers are");
+    }
 
   }
 
