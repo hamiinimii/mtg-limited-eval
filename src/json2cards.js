@@ -1,29 +1,11 @@
 let cards_tier = {};
 
-
 function loadTier(){
-  let tiers = '';
-  let cookie_array = new Array();
-  let result = {};
-
   if (localStorage.tiers){
-    tiers = JSON.parse(localStorage.tiers);
+    return JSON.parse(localStorage.tiers);
   }else{
-    tiers = {};
+    return {};
   }
-
-  return tiers;
-  // if(tiers){
-  //   cookie_array = tiers.split(';');
-  //
-  //   cookie_array.forEach(data => {
-  //       data = data.split('=');
-  //       //data[0]: Cookieの名前（例では「user」）
-  //       //data[1]: Cookieの値（例では「json」）
-  //       result[data[0]] = JSON.parse(data[1]);
-  //   });
-  // }
-  // return result;
 }
 
 function saveTier(object){
@@ -32,22 +14,15 @@ function saveTier(object){
 }
 
 function jsonToCards(cardJson){
-  const divUntieredElement = document.querySelector('#area_untiered > div');
-  const divTier1Element = document.querySelector('#area_tier1 > div');
-  const divTier2Element = document.querySelector('#area_tier2 > div');
-  const divTier3Element = document.querySelector('#area_tier3 > div');
-  const divTier4Element = document.querySelector('#area_tier4 > div');
-  const divTier5Element = document.querySelector('#area_tier5 > div');
-  const divTier6Element = document.querySelector('#area_tier6 > div');
 
   const tierElements = [
-    divUntieredElement,
-    divTier1Element,
-    divTier2Element,
-    divTier3Element,
-    divTier4Element,
-    divTier5Element,
-    divTier6Element
+    document.querySelector('#area_untiered > div'),
+    document.querySelector('#area_tier1 > div'),
+    document.querySelector('#area_tier2 > div'),
+    document.querySelector('#area_tier3 > div'),
+    document.querySelector('#area_tier4 > div'),
+    document.querySelector('#area_tier5 > div'),
+    document.querySelector('#area_tier6 > div')
   ];
 
   // load tier from localStorage
@@ -114,17 +89,11 @@ function jsonToCards(cardJson){
 
     // check tier
     if (!(card_id in cards_tier)){
-      cards_tier[card_id] = "untiered";
+      cards_tier[card_id] = '0';
     }
 
-
-    if (cards_tier[card_id]=="untiered"){
-      tierElements[0].appendChild(divCardElement);
-    }else{
-      let tier_int = parseInt(cards_tier[card_id]);
-      tierElements[tier_int].appendChild(divCardElement);
-      // console.log("end of json2cards but tiers are");
-    }
+    let tier_int = parseInt(cards_tier[card_id]);
+    tierElements[tier_int].appendChild(divCardElement);
 
   }
 
