@@ -45,21 +45,22 @@ function jsonToCards(cardJson){
     // restore data of back face of double faced cards
     if (card.layout=='transform') {
       if (card.side === 'b') {
-        backfaces[card.identifiers.scryfallId] = {
+        backfaces[card.uuid] = {
           otherFaceIds: card.otherFaceIds,
           faceName: card.faceName,
+          scryfallId: card.identifiers.scryfallId,
           types: card.types
         };
         continue;
       } else if(card.side === 'a') {
-        faceUuidToId[card.uuid] = card.identifiers.scryfallId;
+        // faceUuidToId[card.uuid] = card.uuid;
         hrefImgElement.dataset.title = card.faceName;
       }
     } else{
       hrefImgElement.dataset.title = card.name;
     }
 
-    let card_id = card.identifiers.scryfallId;
+    let card_id = card.uuid;
 
     divCardElement.className = 'card_div';
     divCardElement.id = card_id;
@@ -67,7 +68,7 @@ function jsonToCards(cardJson){
     divCardElement.setAttribute('ondragstart', 'dragstart(event)');
 
     hrefImgElement.id = card_id; // use same id to make parent draggable
-    hrefImgElement.href = 'https://api.scryfall.com/cards/' + card_id + '?format=image&face=front';
+    hrefImgElement.href = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
     hrefImgElement.dataset.lightbox = `card_${card_id}`;
     hrefImgElement.dataset.c_face = 'front';
 
@@ -99,10 +100,10 @@ function jsonToCards(cardJson){
 
   // make elements for backface of transform cards
   for (let [id, data] of Object.entries(backfaces)) {
-    let back_id = id;
-    let face_id = faceUuidToId[data.otherFaceIds.at(0)];
+    // let back_id = id;
+    let face_id = data.otherFaceIds.at(0);
     const hrefImgElement = document.createElement('a');
-    hrefImgElement.href = 'https://api.scryfall.com/cards/' + back_id + '?format=image&face=back';
+    hrefImgElement.href = 'https://api.scryfall.com/cards/' + data.scryfallId + '?format=image&face=back';
     hrefImgElement.dataset.lightbox = `card_${face_id}`
     hrefImgElement.dataset.title = data.faceName;
     hrefImgElement.dataset.c_types = data.types;
