@@ -85,12 +85,16 @@ $('.checkall').change(function() {
        $(o).hide();
      }
    })
+
  }
 
  function styleCheck(){
-   console.log($('#wrapper').height());
+   // remove Untiered if no cards left anymore
+   console.log($('#cards_untiered').find('.card_div').length);
+   if ($('#cards_untiered').find('.card_div').length==0){
+     $('#area_untiered').hide();
+   }
+   // adjust bg height to scroll or window
    scrollPx = $('#wrapper').height() + 'px';
-
-   // $('.bg').css('height','100vh');
    $('.bg').css('height','max('+scrollPx+',100vh');
  }

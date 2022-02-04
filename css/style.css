@@ -8,6 +8,8 @@ body {
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
+  font-size: 1.5em;
+  font-family: 'Oswald', sans-serif;
 }
 
 .bg {
@@ -37,7 +39,7 @@ body {
 }
 
 .cards{
-  padding: 20px 25px;
+  padding: 5px 20px 10px 20px;
   /* -khtml-user-drag: element; */
 
   display: flex;
@@ -60,6 +62,7 @@ body {
 }
 
 .side{
+  font-family: 'Roboto', sans-serif;
   background-color: brown;
   color: white;
   position:absolute;
@@ -68,6 +71,7 @@ body {
 
 .tiertext{
   text-align: right;
+  margin: 20px 1em 0 0;
 }
 
 .variations{

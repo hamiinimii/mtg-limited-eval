@@ -5,6 +5,11 @@
     <title>cardlist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <link rel="stylesheet" href="./css/style.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
     <script type="text/javascript">
@@ -18,7 +23,7 @@
   <body>
     <div class="bg">
 
-      <button type="button" name="menu" class="btn_menu">menu</button>
+      <!-- <button type="button" name="menu" class="btn_menu">menu</button> -->
       <article id="wrapper">
         <!-- side menu to change parameters -->
         <div class="side">
@@ -85,7 +90,7 @@
             <div class="cards" id="cards_tier6" ondrop="drop(event)" ondragover="dragover(event)"></div>
           </section>
           <section class="area" id="area_untiered" style="background-color: rgba(240,240,240, 0.6)">
-            <p class="tiertext">Untiered</p>
+            <p class="tiertext">(Untiered)</p>
             <div class="cards" id="cards_untiered"></div>
           </section>
 
@@ -106,6 +111,7 @@
           const cardJson = request.response["data"]["cards"];
           jsonToCards(cardJson);
           filterChange();
+          styleCheck();
           console.log(cardJson);
         }
 

@@ -34,8 +34,8 @@ function jsonToCards(cardJson){
   let variations_to_orig = {};
 
   // loop for all cards (including back face)
-  for (let i = 0; i < cardJson.length; i++) {
-  // for (let i = 0; i < 30; i++) {
+  // for (let i = 0; i < cardJson.length; i++) {
+  for (let i = 0; i < 7; i++) {
     let card = cardJson[i];
 
     let divCardElement = document.createElement('div');
