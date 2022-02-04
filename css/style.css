@@ -43,9 +43,9 @@ body {
 }
 
 .cards{
+  all: initial;
   padding: 5px 20px 10px 20px;
   /* -khtml-user-drag: element; */
-
   display: flex;
   flex-wrap: wrap;
   flex: auto;
