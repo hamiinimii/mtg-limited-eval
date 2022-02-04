@@ -1,24 +1,36 @@
 // toggle menu
-$('.btn_menu').on('click', () => {
-  $('.side').stop(true).animate({'width': 'toggle'});
+$('.btn_menu').click(function(){
+  // $('.side').stop(true).animate({'width': 'toggle'});
+  console.log("menu btn clicked");
+  $(this).toggleClass('active');
+  $(".side_menu").toggleClass('panelactive');
 });
 // check all
 $('.btn_check').on('click', () => {
-  $('.check').each(function(i, o){
+  $('.checkall').each(function(i, o){
     // console.log(o);
     $(o).attr('checked', true).prop('checked', true).change();
   })
 });
 // uncheck all
 $('.btn_uncheck').on('click', () => {
-  $('.check').each(function(i, o){
-    // console.log(o);
+  $('.checkall').each(function(i, o){
     $(o).removeAttr('checked').prop('checked', false).change();
+  })
+});
+// uncheck area
+$('.checkall').change(function() {
+  let isChecked = $(this).prop('checked');
+  let filter = '.' + $(this).attr('class').split(' ')[1];
+  $('.check'+ filter).each(function(i, o){
+    // console.log(o);
+    $(o).removeAttr('checked').prop('checked', isChecked).change();
   })
 });
 
 // trigger color filtering
  $('.check').change(filterChange);
+ $('.check').change(styleCheck);
 
  // color filtering function
  function filterChange(){
@@ -76,4 +88,16 @@ $('.btn_uncheck').on('click', () => {
        $(o).hide();
      }
    })
+
+ }
+
+ function styleCheck(){
+   // remove Untiered if no cards left anymore
+   console.log($('#cards_untiered').find('.card_div').length);
+   if ($('#cards_untiered').find('.card_div').length==0){
+     $('#area_untiered').hide();
+   }
+   // adjust bg height to scroll or window
+   scrollPx = $('#wrapper').height() + 'px';
+   $('.bg').css('height','max('+scrollPx+',100vh');
  }

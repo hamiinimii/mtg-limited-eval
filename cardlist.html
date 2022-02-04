@@ -5,104 +5,121 @@
     <title>cardlist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <link rel="stylesheet" href="./css/style.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
-    <script type="text/javascript" src="./src/json2cards.js"></script>
-    <script type="text/javascript" src="./src/dragdrop.js"></script>
+    <!-- <script type="text/javascript">
+      let vh = window.innerHeight * 0.01;
+      // カスタム変数-vhの値をドキュメントのルートに設定
+      document.documentElement.style.setProperty('vh', `${vh}px`);
+    </script> -->
+
   </head>
   <body>
-    <button type="button" name="menu" class="btn_menu">menu</button>
-    <article id="wrapper">
-      <!-- side menu to change parameters -->
-      <div class="side">
-        <div class="allcheck conditions">
-          <button type="button" class="btn_check">check all</button>
-          <button type="button" class="btn_uncheck">uncheck all</button>
+    <div class="bg">
+
+      <!-- <button type="button" name="menu" class="btn_menu">menu</button> -->
+      <article id="wrapper">
+        <!-- side menu to change parameters -->
+        <div class="btn_menu"><span></span><span></span><span></span></div>
+        <div class="side_menu">
+          <div class="allcheck conditions">
+            <button type="button" class="btn_check">check all</button>
+            <button type="button" class="btn_uncheck">uncheck all</button>
+          </div>
+          <p><input type="checkbox" class="checkall color" checked>color</p>
+          <div class="color conditions">
+            <p><input type="checkbox" class="check color W" checked>white</p>
+            <p><input type="checkbox" class="check color U" checked>blue</p>
+            <p><input type="checkbox" class="check color B" checked>black</p>
+            <p><input type="checkbox" class="check color R" checked>red</p>
+            <p><input type="checkbox" class="check color G" checked>green</p>
+            <p><input type="checkbox" class="check color N" checked>colorless</p>
+            <p><input type="checkbox" class="check color-multi" checked>(show multicolored)</p>
+          </div>
+          <p><input type="checkbox" class="checkall rarity" checked>rarity</p>
+          <div class="rarity conditions">
+            <p><input type="checkbox" class="check rarity common" checked>common</p>
+            <p><input type="checkbox" class="check rarity uncommon" checked>uncommon</p>
+            <p><input type="checkbox" class="check rarity rare" checked>rare</p>
+            <p><input type="checkbox" class="check rarity mythic" checked>mythic</p>
+          </div>
+          <p><input type="checkbox" class="checkall type" checked>type</p>
+          <div class="type conditions">
+            <p><input type="checkbox" class="check type Creature" checked>Creature</p>
+            <p><input type="checkbox" class="check type Artifact" checked>Artifact</p>
+            <p><input type="checkbox" class="check type Enchantment" checked>Enchantment</p>
+            <p><input type="checkbox" class="check type Planeswalker" checked>Planeswalker</p>
+            <p><input type="checkbox" class="check type Instant" checked>Instant</p>
+            <p><input type="checkbox" class="check type Sorcery" checked>Sorcery</p>
+            <p><input type="checkbox" class="check type Land" checked>Land</p>
+            <p><input type="checkbox" class="check type-multi" checked>(include back face)</p>
+          </div>
         </div>
-        <p>color</p>
-        <div class="color conditions">
-          <p><input type="checkbox" class="check color W" checked>white</p>
-          <p><input type="checkbox" class="check color U" checked>blue</p>
-          <p><input type="checkbox" class="check color B" checked>black</p>
-          <p><input type="checkbox" class="check color R" checked>red</p>
-          <p><input type="checkbox" class="check color G" checked>green</p>
-          <p><input type="checkbox" class="check color N" checked>colorless</p>
-          <p><input type="checkbox" class="check color-multi" checked>(show multicolored)</p>
+        <!-- sidemenu end -->
+
+        <div class="contents">
+          <p class="pagename">Draft Pick Tier</p>
+          <!-- where cards appear -->
+          <section class="area" id="area_tier1" style="background-color: rgba(225,199,127, 0.7)">
+            <p class="tiertext">Tier 1: Incredible Bombs</p>
+            <div class="cards" id="cards_tier1" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          </section>
+          <section class="area" id="area_tier2" style="background-color: rgba(213,213,210, 0.67)">
+            <p class="tiertext">Tier 2: Great First Picks</p>
+            <div class="cards" id="cards_tier2" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          </section>
+          <section class="area" id="area_tier3" style="background-color: rgba(216,171,126, 0.7)">
+            <p class="tiertext">Tier 3: Above Average Cards</p>
+            <div class="cards" id="cards_tier3" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          </section>
+          <section class="area" id="area_tier4" style="background-color: rgba(190,205,180, 0.7)">
+            <p class="tiertext">Tier 4: Solid Playables</p>
+            <div class="cards" id="cards_tier4" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          </section>
+          <section class="area" id="area_tier5" style="background-color: rgba(170,170,190, 0.7)">
+            <p class="tiertext">Tier 5: Sometimes Playable</p>
+            <div class="cards" id="cards_tier5" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          </section>
+          <section class="area" id="area_tier6" style="background-color: rgba(120,120,120, 0.7)">
+            <p class="tiertext">Tier 6: Rarely Playable or Basically Unplayable</p>
+            <div class="cards" id="cards_tier6" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          </section>
+          <section class="area" id="area_untiered" style="background-color: rgba(240,240,240, 0.6)">
+            <p class="tiertext" style="color: rgba(70,70,70,1)">(Untiered)</p>
+            <div class="cards" id="cards_untiered"></div>
+          </section>
+
         </div>
-        <p>rarity</p>
-        <div class="rarity conditions">
-          <p><input type="checkbox" class="check rarity common" checked>common</p>
-          <p><input type="checkbox" class="check rarity uncommon" checked>uncommon</p>
-          <p><input type="checkbox" class="check rarity rare" checked>rare</p>
-          <p><input type="checkbox" class="check rarity mythic" checked>mythic</p>
-        </div>
-        <p>type</p>
-        <div class="type conditions">
-          <p><input type="checkbox" class="check type Creature" checked>Creature</p>
-          <p><input type="checkbox" class="check type Artifact" checked>Artifact</p>
-          <p><input type="checkbox" class="check type Enchantment" checked>Enchantment</p>
-          <p><input type="checkbox" class="check type Planeswalker" checked>Planeswalker</p>
-          <p><input type="checkbox" class="check type Instant" checked>Instant</p>
-          <p><input type="checkbox" class="check type Sorcery" checked>Sorcery</p>
-          <p><input type="checkbox" class="check type Land" checked>Land</p>
-          <p><input type="checkbox" class="check type-multi">(include back face)</p>
-        </div>
-      </div>
+      </article>
+
+      <script type="text/javascript" src="./src/json2cards.js"></script>
+      <script type="text/javascript" src="./src/dragdrop.js"></script>
       <script type="text/javascript" src="./src/sidemenu.js"></script>
-      <!-- sidemenu end -->
+      <script type="text/javascript">
+        // request json
+        // let requestURL = './data/NEO.json';
+        let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
+        let request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json';
+        request.send();
 
-      <div class="contents">
-        <!-- where cards appear -->
-        <section class="area" id="area_tier1" style="background-color: blue">
-          <p class="tiertext">Tier 1: Incredible Bombs</p>
-          <div class="cards" id="cards_tier1" ondrop="drop(event)" ondragover="dragover(event)"></div>
-        </section>
-        <section class="area" id="area_tier2" style="background-color: green">
-          <p class="tiertext">Tier 2: Great First Picks</p>
-          <div class="cards" id="cards_tier2" ondrop="drop(event)" ondragover="dragover(event)"></div>
-        </section>
-        <section class="area" id="area_tier3" style="background-color: red">
-          <p class="tiertext">Tier 3: Above Average Cards</p>
-          <div class="cards" id="cards_tier3" ondrop="drop(event)" ondragover="dragover(event)"></div>
-        </section>
-        <section class="area" id="area_tier4" style="background-color: yellow">
-          <p class="tiertext">Tier 4: Solid Playables</p>
-          <div class="cards" id="cards_tier4" ondrop="drop(event)" ondragover="dragover(event)"></div>
-        </section>
-        <section class="area" id="area_tier5" style="background-color: purple">
-          <p class="tiertext">Tier 5: Sometimes Playable</p>
-          <div class="cards" id="cards_tier5" ondrop="drop(event)" ondragover="dragover(event)"></div>
-        </section>
-        <section class="area" id="area_tier6" style="background-color: gray">
-          <p class="tiertext">Tier 6: Rarely Playable or Basically Unplayable</p>
-          <div class="cards" id="cards_tier6" ondrop="drop(event)" ondragover="dragover(event)"></div>
-        </section>
-        <section class="area" id="area_untiered" style="background-color: white">
-          <p class="tiertext">Untiered</p>
-          <div class="cards" id="cards_untiered"></div>
-        </section>
+        request.onload = function() {
+          const cardJson = request.response["data"]["cards"];
+          jsonToCards(cardJson);
+          filterChange();
+          styleCheck();
+          console.log(cardJson);
+        }
 
-      </div>
-    </article>
-
-    <script type="text/javascript">
-
-      // request json
-      // let requestURL = './data/NEO.json';
-      let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
-      let request = new XMLHttpRequest();
-      request.open('GET', requestURL);
-      request.responseType = 'json';
-      request.send();
-
-      request.onload = function() {
-        const cardJson = request.response["data"]["cards"];
-        jsonToCards(cardJson);
-        filterChange();
-        console.log(cardJson);
-      }
-
-    </script>
+      </script>
+    </div>
 
   </body>
 </html>
