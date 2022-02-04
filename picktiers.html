@@ -18,15 +18,18 @@
     <div class="headmenu">
       <div class="btn_menu"><span></span><span></span><span></span></div>
       <div class="pagename">DraftFan</div>
-      <div class="pagename">Pick Tiers</div>
-      <div class="pagename">Statistics</div>
+      <!-- <div class="pagename">Pick Tiers</div> -->
+      <!-- <div class="pagename">Statistics</div> -->
 
     </div>
     <!-- side menu to change parameters -->
     <div class="side_menu">
       <div class="allcheck conditions">
-        <button type="button" class="btn_check">check all</button>
-        <button type="button" class="btn_uncheck">uncheck all</button>
+        <button type="button" id="btn_check">check all</button>
+        <button type="button" id="btn_uncheck">uncheck all</button>
+        <button type="button" id="btn_export">export</button>
+        <button type="button" id="btn_import"><label>import<input type="file" onchange="fileChanged(this)" style="display: none;"></label></button>
+
       </div>
       <p><input type="checkbox" class="checkall color" checked>color</p>
       <div class="color conditions">
