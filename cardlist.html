@@ -10,23 +10,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       let vh = window.innerHeight * 0.01;
-      // カスタム変数--vhの値をドキュメントのルートに設定
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    </script>
-    <script type="text/javascript" src="./src/json2cards.js"></script>
-    <script type="text/javascript" src="./src/dragdrop.js"></script>
+      // カスタム変数-vhの値をドキュメントのルートに設定
+      document.documentElement.style.setProperty('vh', `${vh}px`);
+    </script> -->
+
   </head>
   <body>
     <div class="bg">
 
-      <button type="button" name="menu" class="btn_menu">menu</button>
+      <!-- <button type="button" name="menu" class="btn_menu">menu</button> -->
       <article id="wrapper">
         <!-- side menu to change parameters -->
-        <div class="side">
+        <div class="btn_menu"><span></span><span></span><span></span></div>
+        <div class="side_menu">
           <div class="allcheck conditions">
             <button type="button" class="btn_check">check all</button>
             <button type="button" class="btn_uncheck">uncheck all</button>
@@ -60,10 +61,10 @@
             <p><input type="checkbox" class="check type-multi" checked>(include back face)</p>
           </div>
         </div>
-        <script type="text/javascript" src="./src/sidemenu.js"></script>
         <!-- sidemenu end -->
 
         <div class="contents">
+          <p class="pagename">Draft Pick Tier</p>
           <!-- where cards appear -->
           <section class="area" id="area_tier1" style="background-color: rgba(225,199,127, 0.7)">
             <p class="tiertext">Tier 1: Incredible Bombs</p>
@@ -97,8 +98,10 @@
         </div>
       </article>
 
+      <script type="text/javascript" src="./src/json2cards.js"></script>
+      <script type="text/javascript" src="./src/dragdrop.js"></script>
+      <script type="text/javascript" src="./src/sidemenu.js"></script>
       <script type="text/javascript">
-
         // request json
         let requestURL = './data/NEO.json';
         // let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
