@@ -2,15 +2,41 @@ article{
   display: flex;
 }
 
+body {
+  margin: 0;
+}
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
 }
 
+.bg {
+  background-image: url('https://images.ctfassets.net/s5n2t79q9icq/6dEUS6x1T4VD85vE6ltEfz/8fb899af1d42504cda6535db164a56e3/E8kKpHKnpV_1023x700.jpg');
+  background-size: cover;
+  /* position: relative; */
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  /* おまじない */
+  backdrop-filter: blur(0);
+  z-index: 0;
+}
+
+.bg::before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.4);
+  background-size: cover;
+  /* ↓全体を覆うように配置 */
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .cards{
   padding: 20px 25px;
-  /* margin: 50px 30px 20px 50px; */
-  -khtml-user-drag: element;
+  /* -khtml-user-drag: element; */
 
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +45,7 @@ article{
 
 .conditions{
   display: flex;
+  flex-wrap: wrap;
 }
 
 #wrapper{
@@ -29,12 +56,7 @@ article{
   background-color: brown;
   color: white;
   position:absolute;
-  white-space: nowrap;
-  /* position: -webkit-sticky;
-  position: sticky; */
-  /* position: fixed; */
-
-  /* transform: translateX(-50%) translateY(-50%); */
+  /* white-space: wrap; */
 }
 
 .tiertext{

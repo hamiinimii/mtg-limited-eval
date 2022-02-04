@@ -16,6 +16,14 @@ $('.btn_uncheck').on('click', () => {
     $(o).removeAttr('checked').prop('checked', false).change();
   })
 });
+// uncheck area
+$('.checkall').change(function() {
+  console.log($(this).type);
+  // $('.check').each(function(i, o){
+  //   // console.log(o);
+  //   $(o).removeAttr('checked').prop('checked', false).change();
+  // })
+});
 
 // trigger color filtering
  $('.check').change(filterChange);
