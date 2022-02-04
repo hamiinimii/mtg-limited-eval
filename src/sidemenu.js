@@ -4,14 +4,14 @@ $('.btn_menu').click(function(){
   $(".side_menu").toggleClass('panelactive');
 });
 // check all
-$('.btn_check').on('click', () => {
+$('#btn_check').on('click', () => {
   $('.checkall').each(function(i, o){
     // console.log(o);
     $(o).attr('checked', true).prop('checked', true).change();
   })
 });
 // uncheck all
-$('.btn_uncheck').on('click', () => {
+$('#btn_uncheck').on('click', () => {
   $('.checkall').each(function(i, o){
     $(o).removeAttr('checked').prop('checked', false).change();
   })
@@ -99,3 +99,29 @@ $('.checkall').change(function() {
    scrollPx = $('#wrapper').height() + 'px';
    $('.bg').css('height','max('+scrollPx+',100vh');
  }
+
+
+ // export tier data
+ $('#btn_export').on('click', () => {
+   if (localStorage.tiers){
+     jsontext = localStorage.tiers;
+     const a = document.createElement('a');
+     a.href = 'data:text/plain,' + encodeURIComponent(jsontext);
+     // a.href = 'data:text/plain,' + jsontext;
+     a.download = 'tier.json';
+
+     a.click();
+   }
+ });
+
+// inport tier data
+function fileChanged(input){
+  let reader = new FileReader();
+  reader.readAsText(input.files[0])
+  reader.onload = function(event){
+    console.log(reader.result);
+    localStorage.tiers = reader.result;
+    location.reload(false);
+  }
+  // reader.readAsText(input.files[0]);
+}
