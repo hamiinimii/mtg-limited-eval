@@ -1,7 +1,5 @@
 // toggle menu
 $('.btn_menu').click(function(){
-  // $('.side').stop(true).animate({'width': 'toggle'});
-  console.log("menu btn clicked");
   $(this).toggleClass('active');
   $(".side_menu").toggleClass('panelactive');
 });

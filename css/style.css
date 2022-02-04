@@ -6,12 +6,13 @@ body {
   margin: 0;
 }
 
-.allcheck {
+/* .allcheck {
   margin: 0 0 0 50px;
-}
+} */
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
+  margin: 0 0 0 15px;
   font-size: 1.5em;
   font-family: 'Oswald', sans-serif;
 }
@@ -59,14 +60,23 @@ body {
 .contents{
   /* to keep tier area window size */
   width: 100%;
+  margin: 50px 0 20px 0;
+}
+
+.headmenu{
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  background-color: rgba(40,40,40,1);
 }
 
 .pagename{
   font-family: 'Ubuntu', sans-serif;
-  font-size: 2.5em;
+  font-size: 2em;
   color: white;
-  vertical-align: middle;
-  margin: 0 0 0 55px;
+  margin: 0 5px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .tiertext{
@@ -84,7 +94,7 @@ body {
   color: white;
   white-space: nowrap;
   position: fixed;
-  padding: 25px 0 0 0;
+  padding: 50px 0 0 0;
   z-index: 99;
   /* start position of navi */
   /* top: 0; */
@@ -103,8 +113,7 @@ body {
   background-color: gray;
   font-family: 'Roboto', sans-serif;
   color: white;
-  position: fixed;
-  z-index: 999;
+  /* position: fixed; */
   /* top: 10px; */
   cursor: pointer;
   width: 50px;
@@ -117,11 +126,11 @@ body {
     display: inline-block;
     transition: all .4s;
     position: absolute;
-    left: 14px;
+    left: 12px;
     height: 3px;
-    border-radius: 2px;
+    /* border-radius: 2px; */
     background-color: #666;
-    width: 45%;
+    width: 6%;
   }
 
 .btn_menu span:nth-of-type(1) {
@@ -138,9 +147,9 @@ body {
 
 .btn_menu.active span:nth-of-type(1) {
     top: 30px;
-    left: 18px;
+    left: 10px;
     transform: translateY(-6px) rotate(45deg);
-    width: 30%;
+    width: 7%;
 }
 
 .btn_menu.active span:nth-of-type(2) {
@@ -149,7 +158,7 @@ body {
 
 .btn_menu.active span:nth-of-type(3){
     top: 18px;
-    left: 18px;
+    left: 10px;
     transform: translateY(6px) rotate(-45deg);
-    width: 30%;
+    width: 7%;
 }
