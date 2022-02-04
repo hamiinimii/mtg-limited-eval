@@ -8,7 +8,6 @@ body {
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
-  /* width: max(100%, 100vh); */
 }
 
 .bg {
@@ -49,6 +48,11 @@ body {
 .conditions{
   display: flex;
   /* flex-wrap: wrap; */
+}
+
+.contents{
+  /* to keep tier area window size */
+  width: 100%;
 }
 
 #wrapper{
