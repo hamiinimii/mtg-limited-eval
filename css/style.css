@@ -8,6 +8,7 @@ body {
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
+  /* width: max(100%, 100vh); */
 }
 
 .bg {
@@ -17,6 +18,8 @@ body {
   background-attachment: fixed;
   width: 100%;
   height: 100%;
+  /* height: max(100%, 100vh); */
+  /* height: calc(var(--vh, 1vh) * 100); */
   /* おまじない */
   backdrop-filter: blur(0);
   z-index: 0;
@@ -45,7 +48,7 @@ body {
 
 .conditions{
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 #wrapper{
@@ -56,7 +59,7 @@ body {
   background-color: brown;
   color: white;
   position:absolute;
-  /* white-space: wrap; */
+  white-space: nowrap;
 }
 
 .tiertext{

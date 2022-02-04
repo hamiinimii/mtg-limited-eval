@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script type="text/javascript">
+      let vh = window.innerHeight * 0.01;
+      // カスタム変数--vhの値をドキュメントのルートに設定
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    </script>
     <script type="text/javascript" src="./src/json2cards.js"></script>
     <script type="text/javascript" src="./src/dragdrop.js"></script>
   </head>
-  <body class="background">
+  <body>
     <div class="bg">
 
       <button type="button" name="menu" class="btn_menu">menu</button>
@@ -21,7 +26,7 @@
             <button type="button" class="btn_check">check all</button>
             <button type="button" class="btn_uncheck">uncheck all</button>
           </div>
-          <p><input type="checkbox" class="check color checkall" checked>color</p>
+          <p><input type="checkbox" class="checkall color" checked>color</p>
           <div class="color conditions">
             <p><input type="checkbox" class="check color W" checked>white</p>
             <p><input type="checkbox" class="check color U" checked>blue</p>
@@ -31,14 +36,14 @@
             <p><input type="checkbox" class="check color N" checked>colorless</p>
             <p><input type="checkbox" class="check color-multi" checked>(show multicolored)</p>
           </div>
-          <p>rarity</p>
+          <p><input type="checkbox" class="checkall rarity" checked>rarity</p>
           <div class="rarity conditions">
             <p><input type="checkbox" class="check rarity common" checked>common</p>
             <p><input type="checkbox" class="check rarity uncommon" checked>uncommon</p>
             <p><input type="checkbox" class="check rarity rare" checked>rare</p>
             <p><input type="checkbox" class="check rarity mythic" checked>mythic</p>
           </div>
-          <p>type</p>
+          <p><input type="checkbox" class="checkall type" checked>type</p>
           <div class="type conditions">
             <p><input type="checkbox" class="check type Creature" checked>Creature</p>
             <p><input type="checkbox" class="check type Artifact" checked>Artifact</p>
@@ -47,7 +52,7 @@
             <p><input type="checkbox" class="check type Instant" checked>Instant</p>
             <p><input type="checkbox" class="check type Sorcery" checked>Sorcery</p>
             <p><input type="checkbox" class="check type Land" checked>Land</p>
-            <p><input type="checkbox" class="check type-multi">(include back face)</p>
+            <p><input type="checkbox" class="check type-multi" checked>(include back face)</p>
           </div>
         </div>
         <script type="text/javascript" src="./src/sidemenu.js"></script>

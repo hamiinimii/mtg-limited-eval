@@ -4,29 +4,30 @@ $('.btn_menu').on('click', () => {
 });
 // check all
 $('.btn_check').on('click', () => {
-  $('.check').each(function(i, o){
+  $('.checkall').each(function(i, o){
     // console.log(o);
     $(o).attr('checked', true).prop('checked', true).change();
   })
 });
 // uncheck all
 $('.btn_uncheck').on('click', () => {
-  $('.check').each(function(i, o){
-    // console.log(o);
+  $('.checkall').each(function(i, o){
     $(o).removeAttr('checked').prop('checked', false).change();
   })
 });
 // uncheck area
 $('.checkall').change(function() {
-  console.log($(this).type);
-  // $('.check').each(function(i, o){
-  //   // console.log(o);
-  //   $(o).removeAttr('checked').prop('checked', false).change();
-  // })
+  let isChecked = $(this).prop('checked');
+  let filter = '.' + $(this).attr('class').split(' ')[1];
+  $('.check'+ filter).each(function(i, o){
+    // console.log(o);
+    $(o).removeAttr('checked').prop('checked', isChecked).change();
+  })
 });
 
 // trigger color filtering
  $('.check').change(filterChange);
+ $('.check').change(styleCheck);
 
  // color filtering function
  function filterChange(){
@@ -84,4 +85,12 @@ $('.checkall').change(function() {
        $(o).hide();
      }
    })
+ }
+
+ function styleCheck(){
+   console.log($('#wrapper').height());
+   scrollPx = $('#wrapper').height() + 'px';
+
+   // $('.bg').css('height','100vh');
+   $('.bg').css('height','max('+scrollPx+',100vh');
  }
