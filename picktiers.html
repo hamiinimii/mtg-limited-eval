@@ -12,61 +12,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
+    <!-- CDN -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
-
-
-    <div class="headmenu">
-      <div class="btn_menu"><span></span><span></span><span></span></div>
-      <div class="pagename">DraftFan</div>
-      <!-- <div class="pagename">Pick Tiers</div> -->
-      <!-- <div class="pagename">Statistics</div> -->
-
-    </div>
-    <!-- side menu to change parameters -->
-    <div class="side_menu">
-      <div class="allcheck conditions">
-        <button type="button" id="btn_check">check all</button>
-        <button type="button" id="btn_uncheck">uncheck all</button>
-        <button type="button" id="btn_export">export</button>
-        <button type="button" id="btn_import"><label>import<input type="file" onchange="fileChanged(this)" style="display: none;"></label></button>
-
-      </div>
-      <p><input type="checkbox" class="checkall color" checked>color</p>
-      <div class="color conditions">
-        <p><input type="checkbox" class="check color W" checked>white</p>
-        <p><input type="checkbox" class="check color U" checked>blue</p>
-        <p><input type="checkbox" class="check color B" checked>black</p>
-        <p><input type="checkbox" class="check color R" checked>red</p>
-        <p><input type="checkbox" class="check color G" checked>green</p>
-        <p><input type="checkbox" class="check color N" checked>colorless</p>
-        <p><input type="checkbox" class="check color-multi" checked>(show multicolored)</p>
-      </div>
-      <p><input type="checkbox" class="checkall rarity" checked>rarity</p>
-      <div class="rarity conditions">
-        <p><input type="checkbox" class="check rarity common" checked>common</p>
-        <p><input type="checkbox" class="check rarity uncommon" checked>uncommon</p>
-        <p><input type="checkbox" class="check rarity rare" checked>rare</p>
-        <p><input type="checkbox" class="check rarity mythic" checked>mythic</p>
-      </div>
-      <p><input type="checkbox" class="checkall type" checked>type</p>
-      <div class="type conditions">
-        <p><input type="checkbox" class="check type Creature" checked>Creature</p>
-        <p><input type="checkbox" class="check type Artifact" checked>Artifact</p>
-        <p><input type="checkbox" class="check type Enchantment" checked>Enchantment</p>
-        <p><input type="checkbox" class="check type Planeswalker" checked>Planeswalker</p>
-        <p><input type="checkbox" class="check type Instant" checked>Instant</p>
-        <p><input type="checkbox" class="check type Sorcery" checked>Sorcery</p>
-        <p><input type="checkbox" class="check type Land" checked>Land</p>
-        <p><input type="checkbox" class="check type-multi" checked>(include back face)</p>
-      </div>
-    </div>
-    <!-- sidemenu end -->
 
   </head>
 
   <body>
+    <div class="headmenu">
+      <div class="btn_menu"><span></span><span></span><span></span></div>
+      <div class="btn_pagename">DraftFan</div>
+      <div class="btn_pagename tiers active"></a>Pick Tiers</div>
+      <div class="btn_pagename statistics"></a>Statistics</div>
+
+    </div>
+    <!-- side menu to change parameters -->
+    <div class="side_menu">
+      <div id="tier_menu" class="tiers tabmenu">
+
+        <div class="allcheck conditions">
+          <button type="button" id="btn_check">check all</button>
+          <button type="button" id="btn_uncheck">uncheck all</button>
+          <button type="button" id="btn_export">export</button>
+          <button type="button" id="btn_import"><label>import<input type="file" onchange="fileChanged(this)" style="display: none;"></label></button>
+
+        </div>
+        <p><input type="checkbox" class="checkall color" checked>color</p>
+        <div class="color conditions">
+          <p><input type="checkbox" class="check color W" checked>white</p>
+          <p><input type="checkbox" class="check color U" checked>blue</p>
+          <p><input type="checkbox" class="check color B" checked>black</p>
+          <p><input type="checkbox" class="check color R" checked>red</p>
+          <p><input type="checkbox" class="check color G" checked>green</p>
+          <p><input type="checkbox" class="check color N" checked>colorless</p>
+          <p><input type="checkbox" class="check color-multi" checked>(show multicolored)</p>
+        </div>
+        <p><input type="checkbox" class="checkall rarity" checked>rarity</p>
+        <div class="rarity conditions">
+          <p><input type="checkbox" class="check rarity common" checked>common</p>
+          <p><input type="checkbox" class="check rarity uncommon" checked>uncommon</p>
+          <p><input type="checkbox" class="check rarity rare" checked>rare</p>
+          <p><input type="checkbox" class="check rarity mythic" checked>mythic</p>
+        </div>
+        <p><input type="checkbox" class="checkall type" checked>type</p>
+        <div class="type conditions">
+          <p><input type="checkbox" class="check type Creature" checked>Creature</p>
+          <p><input type="checkbox" class="check type Artifact" checked>Artifact</p>
+          <p><input type="checkbox" class="check type Enchantment" checked>Enchantment</p>
+          <p><input type="checkbox" class="check type Planeswalker" checked>Planeswalker</p>
+          <p><input type="checkbox" class="check type Instant" checked>Instant</p>
+          <p><input type="checkbox" class="check type Sorcery" checked>Sorcery</p>
+          <p><input type="checkbox" class="check type Land" checked>Land</p>
+          <p><input type="checkbox" class="check type-multi" checked>(include back face)</p>
+        </div>
+      </div>
+    </div>
+    <!-- sidemenu end -->
     <div class="bg">
-      <article id="wrapper">
+      <article id="tier_contents" class="tiers tabarea active">
         <div class="contents">
           <!-- where cards appear -->
           <section class="area" id="area_tier1" style="background-color: rgba(225,199,127, 0.7)">
@@ -101,13 +103,21 @@
         </div>
       </article>
 
+      <article id="statistics_contents" class="statistics tabarea">
+        <div class="contents">
+<!-- 
+          <p style="background-color: yellow">TESTEST</p>
+          <p style="background-color: yellow">TESTEST</p> -->
+        </div>
+      </article>
+
       <script type="text/javascript" src="./src/json2cards.js"></script>
       <script type="text/javascript" src="./src/dragdrop.js"></script>
       <script type="text/javascript" src="./src/sidemenu.js"></script>
       <script type="text/javascript">
         // request json
-        // let requestURL = './data/NEO.json';
-        let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
+        let requestURL = './data/NEO.json';
+        // let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json';
@@ -122,6 +132,7 @@
         }
 
       </script>
+
     </div>
 
   </body>

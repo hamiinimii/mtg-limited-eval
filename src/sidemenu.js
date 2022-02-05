@@ -1,3 +1,22 @@
+// tabs buttons
+$('.btn_pagename').click(function() {
+  $('.btn_pagename').each(function(i, o){
+    $(o).removeClass('active');
+  })
+  $(this).addClass('active');
+
+  let targetArea = $(this).attr('class').split(' ')[1];
+  $('.tabarea').each(function(i, o){
+    if ($(o).hasClass(targetArea)) {
+      $(o).addClass('active');
+    }else{
+      $(o).removeClass('active');
+    }
+  })
+  styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
+});
+
+
 // toggle menu
 $('.btn_menu').click(function(){
   $(this).toggleClass('active');
@@ -91,12 +110,12 @@ $('.checkall').change(function() {
 
  function styleCheck(){
    // remove Untiered if no cards left anymore
-   console.log($('#cards_untiered').find('.card_div').length);
    if ($('#cards_untiered').find('.card_div').length==0){
      $('#area_untiered').hide();
    }
    // adjust bg height to scroll or window
-   scrollPx = $('#wrapper').height() + 'px';
+   console.log($('#tier_contents').height());
+   scrollPx = $('#tier_contents').height() + 'px';
    $('.bg').css('height','max('+scrollPx+',100vh');
  }
 
@@ -114,7 +133,7 @@ $('.checkall').change(function() {
    }
  });
 
-// inport tier data
+// import tier data
 function fileChanged(input){
   let reader = new FileReader();
   reader.readAsText(input.files[0])
