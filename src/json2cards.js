@@ -27,7 +27,6 @@ function jsonToCards(cardJson){
 
   // load tier from localStorage
   cards_tier = loadTier();
-  console.log(cards_tier);
 
   //store data for cards
   let backfaces = {};
@@ -35,17 +34,22 @@ function jsonToCards(cardJson){
 
   // loop for all cards (including back face)
   for (let i = 0; i < cardJson.length; i++) {
-  // for (let i = 0; i < 30; i++) {
+  // for (let i = 0; i < 6; i++) {
     let card = cardJson[i];
+    let flag_var = false;
 
     let divCardElement = document.createElement('div');
     const hrefImgElement = document.createElement('a');
     const img1Element = document.createElement('img');
 
     // restore data of variations if exist, and skip second or later variations
-    if ('variations' in card && !(card.uuid in variations_to_orig)){ // first variation case
-      for (let var_uuid of card.variations){
-        variations_to_orig[var_uuid] = card.uuid;
+    if ('variations' in card){
+      if (!(card.uuid in variations_to_orig)){ // first variation case
+        for (let var_uuid of card.variations){
+          variations_to_orig[var_uuid] = card.uuid;
+        }
+      }else{
+        flag_var = true; // other variation case, do not create card_div
       }
     }
 
@@ -58,6 +62,8 @@ function jsonToCards(cardJson){
           scryfallId: card.identifiers.scryfallId,
           types: card.types
         };
+        if (card.power) backfaces[card.uuid]['power']=card.power;
+        if (card.toughness) backfaces[card.uuid]['toughness']=card.toughness;
         continue;
       } else if(card.side === 'a') {
         hrefImgElement.dataset.title = card.faceName;
@@ -66,29 +72,31 @@ function jsonToCards(cardJson){
       hrefImgElement.dataset.title = card.name;
     }
 
-
-    divCardElement.className = 'card_div';
-    divCardElement.id = card.uuid;
-    divCardElement.draggable = 'true';
-    divCardElement.setAttribute('ondragstart', 'dragstart(event)');
-
     hrefImgElement.id = card.uuid; // use same id to make parent draggable
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + card.identifiers.scryfallId + '?format=image&face=front';
     hrefImgElement.dataset.lightbox = `card_${card.uuid}`;
     hrefImgElement.dataset.c_face = 'front';
 
-    img1Element.src = hrefImgElement.href;
-    img1Element.width = 150;
-    img1Element.id = card.uuid // use same id to make parent draggable
+    if (!flag_var){ // do not register parameter if variations
+      divCardElement.className = 'card_div active';
+      divCardElement.id = card.uuid;
+      divCardElement.draggable = 'true';
+      divCardElement.setAttribute('ondragstart', 'dragstart(event)');
 
-    // hidden card parameters
-    hrefImgElement.dataset.c_manacost = card.manaCost;
-    hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
-    hrefImgElement.dataset.c_rarity = card.rarity;
-    hrefImgElement.dataset.c_types = card.types;
-    // pt does not refer back side now
-    if (card.power) hrefImgElement.dataset.c_power = card.power;
-    if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
+      img1Element.src = hrefImgElement.href;
+      img1Element.width = 150;
+      img1Element.id = card.uuid // use same id to make parent draggable
+      // hidden card parameters
+      hrefImgElement.dataset.c_manacost = card.manaCost;
+      hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
+      hrefImgElement.dataset.c_rarity = card.rarity;
+      hrefImgElement.dataset.c_types = card.types;
+      // pt does not refer back side now
+      if (card.power) hrefImgElement.dataset.c_power = card.power;
+      if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
+    }else{
+      divCardElement.className = 'card_div_var';
+    }
 
     divCardElement.appendChild(hrefImgElement);
     hrefImgElement.appendChild(img1Element);
@@ -111,6 +119,8 @@ function jsonToCards(cardJson){
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + data.scryfallId + '?format=image&face=back';
     hrefImgElement.dataset.lightbox = `card_${face_id}`;
     hrefImgElement.dataset.title = data.faceName;
+    hrefImgElement.dataset.c_power = data.power;
+    hrefImgElement.dataset.c_toughness = data.toughness;
     hrefImgElement.dataset.c_types = data.types;
     hrefImgElement.dataset.c_face = 'back';
     let elm = document.getElementById(face_id);
@@ -120,8 +130,9 @@ function jsonToCards(cardJson){
   for (let [var_uuid, orig_uuid] of Object.entries(variations_to_orig)) {
     $('[data-lightbox=card_'+var_uuid+']').each(function(i, o){ // append variation images
       $(o).attr('data-lightbox', 'card_'+orig_uuid);
+      $(o).removeAttr()
     })
-    $('.card_div#'+var_uuid).each(function(i, o){
+    $('.card_div_var#'+var_uuid).each(function(i, o){
       $(o).addClass('variation');
     })
 

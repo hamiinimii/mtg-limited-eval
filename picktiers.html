@@ -14,13 +14,13 @@
 
     <!-- CDN -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
     <div class="headmenu">
       <div class="btn_menu"><span></span><span></span><span></span></div>
-      <div class="btn_pagename">DraftFan</div>
+      <!-- <div class="btn_pagename">DraftFan</div> -->
       <div class="btn_pagename tiers active"></a>Pick Tiers</div>
       <div class="btn_pagename statistics"></a>Statistics</div>
 
@@ -28,7 +28,6 @@
     <!-- side menu to change parameters -->
     <div class="side_menu">
       <div id="tier_menu" class="tiers tabmenu">
-
         <div class="allcheck conditions">
           <button type="button" id="btn_check">check all</button>
           <button type="button" id="btn_uncheck">uncheck all</button>
@@ -65,10 +64,15 @@
           <p><input type="checkbox" class="check type-multi" checked>(include back face)</p>
         </div>
       </div>
+      <!-- side menu for statistics -->
+      <div id="statsmenu" class="statistics menu">
+        <p>statsparam sample</p>
+      </div>
     </div>
     <!-- sidemenu end -->
     <div class="bg">
-      <article id="tier_contents" class="tiers tabarea active">
+      <!-- tier contents area -->
+      <article id="tier_contents" class="tiers tabarea">
         <div class="contents">
           <!-- where cards appear -->
           <section class="area" id="area_tier1" style="background-color: rgba(225,199,127, 0.7)">
@@ -105,19 +109,26 @@
 
       <article id="statistics_contents" class="statistics tabarea">
         <div class="contents">
-<!-- 
+
           <p style="background-color: yellow">TESTEST</p>
-          <p style="background-color: yellow">TESTEST</p> -->
+          <p style="background-color: yellow">TESTEST</p>
+          <div class="chart_div">
+            <canvas id="myChart" class="stat_chart"></canvas>
+            <canvas id="myChart2" class="stat_chart"></canvas>
+            <canvas id="myChart3" class="stat_chart"></canvas>
+          </div>
         </div>
       </article>
 
       <script type="text/javascript" src="./src/json2cards.js"></script>
       <script type="text/javascript" src="./src/dragdrop.js"></script>
       <script type="text/javascript" src="./src/sidemenu.js"></script>
+      <script type="text/javascript" src="./src/tabcontrol.js"></script>
+      <script type="text/javascript" src="./src/statcharts.js"></script>
       <script type="text/javascript">
         // request json
-        let requestURL = './data/NEO.json';
-        // let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
+        // let requestURL = './data/NEO.json';
+        let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json';
@@ -127,8 +138,13 @@
           const cardJson = request.response["data"]["cards"];
           jsonToCards(cardJson);
           filterChange();
+          activateDefaultTab('statistics');
+          let bubdata = generateBubbleData();
+          generateChart('myChart', 'bubble', bubdata);
+          // generateChart('myChart2', 'bubble', bubdata);
+          // generateChart('myChart3', 'bubble', bubdata);
           styleCheck();
-          console.log(cardJson);
+          // console.log(cardJson);
         }
 
       </script>

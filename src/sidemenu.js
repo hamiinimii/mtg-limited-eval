@@ -1,22 +1,3 @@
-// tabs buttons
-$('.btn_pagename').click(function() {
-  $('.btn_pagename').each(function(i, o){
-    $(o).removeClass('active');
-  })
-  $(this).addClass('active');
-
-  let targetArea = $(this).attr('class').split(' ')[1];
-  $('.tabarea').each(function(i, o){
-    if ($(o).hasClass(targetArea)) {
-      $(o).addClass('active');
-    }else{
-      $(o).removeClass('active');
-    }
-  })
-  styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
-});
-
-
 // toggle menu
 $('.btn_menu').click(function(){
   $(this).toggleClass('active');
@@ -100,9 +81,11 @@ $('.checkall').change(function() {
 
      // result
      if (visible.every(value => value==true)){
-       $(o).show();
+       // $(o).show();
+       $(o).addClass('active');
      } else {
-       $(o).hide();
+       // $(o).hide();
+       $(o).removeClass('active');
      }
    })
 

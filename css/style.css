@@ -43,6 +43,21 @@ body {
   display: block;
 }
 
+.btn_pagename{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2em;
+  color: rgba(80,80,80, 1);
+  margin: 0 3px;
+  padding: 0 3px;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgba(200,200,200,0.5);
+}
+.btn_pagename.active{
+  background-color: rgba(40,40,40,1);
+  color: white;
+}
+
 .cards{
   all: initial;
   padding: 5px 20px 10px 20px;
@@ -52,6 +67,18 @@ body {
   flex: auto;
 }
 
+.card_div.active{
+  display:initial;
+}
+.card_div{
+  display:none;
+}
+
+.chart_div {
+  width: 50%;
+  display: flex;
+  /* flex-wrap: wrap; */
+}
 .conditions{
   display: flex;
   /* flex-wrap: wrap; */
@@ -70,24 +97,18 @@ body {
   /* background-color: rgba(40,40,40,1); */
 }
 
-.btn_pagename{
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 2em;
-  color: white;
-  margin: 0 3px;
-  padding: 0 3px;
-  height: 50px;
-  line-height: 50px;
-  background-color: rgba(40,40,40,0.3);
-}
-.btn_pagename.active{
-  background-color: rgba(40,40,40,1);
-}
 
 .tabarea.active{
   display: flex;
 }
 .tabarea{
+  display: none;
+}
+
+.tabmenu.active{
+  display: initial;
+}
+.tabmenu{
   display: none;
 }
 
@@ -108,10 +129,10 @@ body {
   color: white;
   white-space: nowrap;
   position: fixed;
-  padding: 50px 0 0 0;
+  /* padding: 50px 0 0 0; */
   z-index: 99;
   /* start position of navi */
-  /* top: 0; */
+  top: 50px;
   left: -120%;
   /* right: 100%; */
   /* left: auto; */
@@ -122,6 +143,12 @@ body {
 .side_menu.panelactive{
   left:0;
 }
+
+.stat_chart{
+  background-color: rgba(20,20,20,0.7);
+  /* background-color: white; */
+}
+
 
 .btn_menu{
   background-color: gray;
