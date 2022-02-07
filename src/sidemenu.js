@@ -88,6 +88,7 @@ $('.checkall').change(function() {
        $(o).removeClass('active');
      }
    })
+   // stat page
    generateChartsAndTables();
 
  }
@@ -99,8 +100,9 @@ $('.checkall').change(function() {
    }
    // adjust bg height to scroll or window
    console.log($('#tier_contents').height());
-   scrollPx = $('#tier_contents').height() + 'px';
-   $('.bg').css('height','max('+scrollPx+',100vh');
+   scrollPxCards = $('#tier_contents').height() + 'px';
+   scrollPxStats = $('#statistics_contents').height() + 'px';
+   $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+',100vh');
  }
 
 
