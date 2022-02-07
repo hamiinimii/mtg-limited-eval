@@ -11,10 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-
+    <!-- other styles -->
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
     <!-- CDN -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
   </head>
 
   <body>
@@ -107,13 +109,15 @@
           <div class="chart_zone">
             <div class="chart_div">
               <canvas id="chart_mpbubble" class="stat_chart"></canvas>
-              <p>testeststste</p>
+              <div id="table_mp" class="stat_table"></div>
             </div>
             <div class="chart_div">
               <canvas id="chart_mtbubble" class="stat_chart"></canvas>
+              <div id="table_mt" class="stat_table"></div>
             </div>
             <div class="chart_div">
               <canvas id="chart_ptbubble" class="stat_chart"></canvas>
+              <div id="table_pt" class="stat_table"></div>
             </div>
           </div>
         </div>
@@ -138,11 +142,7 @@
           jsonToCards(cardJson);
           filterChange();
           activateDefaultTab('statistics');
-          // let bubdata = generatePTBubbleChart();
-          // generatePTBubbleChart();
-          // generateChart('myChart', 'bubble', bubdata);
-          // generateChart('myChart2', 'bubble', bubdata);
-          // generateChart('chart_bubble', 'bubble', bubdata);
+
           styleCheck();
           // console.log(cardJson);
         }

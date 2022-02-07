@@ -88,7 +88,7 @@ $('.checkall').change(function() {
        $(o).removeClass('active');
      }
    })
-   generatePTBubbleChart();
+   generateChartsAndTables();
 
  }
 

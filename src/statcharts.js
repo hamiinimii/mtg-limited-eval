@@ -1,4 +1,5 @@
-// let ptBubbleChart = null;
+let stats_initialized = false;
+let grids = {};
 
 const option_template = JSON.stringify({
   // type: 'line',
@@ -40,7 +41,45 @@ function generateChart(chart_id, type, data, options){
   // console.log(eval('window.'+chart_name));
 }
 
-function generatePTBubbleChart(){
+function generateTable(title, counts, wrapper){
+  // empty div
+  // $('#'+wrapper).children('div').remove();
+  // console.log(counts.length);
+  // debugger;
+
+  let columns = [...Array(counts.length)].map((_, i) => i.toString()); // [ 0, 1, 2, 3, ...]
+  columns.unshift(title);
+  let data = new Array(counts[0].length); // length of second dimention
+  for (let i=0; i<counts.length; i++){
+    data[i] = new Array(0);
+    data[i].push(i);
+    for (const j of counts[i]){
+      data[i].push(j);
+    }
+  }
+  // console.log(data);
+  if (!stats_initialized){
+    console.log("initial pattern");
+    console.log($('#'+wrapper).find('div'));
+    grids[wrapper] = new gridjs.Grid({
+      columns: columns,
+      data: data,
+      // width: '50%',
+      style: {
+        table: {
+          'font-size': '10px'
+        }
+      }
+    }).render(document.getElementById(wrapper));
+  }else{
+    grids[wrapper].updateConfig({
+      columns: columns,
+      data: data
+    }).forceRender();
+  }
+}
+
+function generateChartsAndTables(){
   let mana_list = [];
   let power_list = [];
   let tough_list = [];
@@ -66,7 +105,7 @@ function generatePTBubbleChart(){
     }
   })
 
-  if (power_list.length && tough_list.length){
+  if (power_list.length && tough_list.length){ // if data is not null
     const mana_range = Math.max(...mana_list)+1;
     const power_range = Math.max(...power_list)+1;
     const tough_range = Math.max(...tough_list)+1;
@@ -120,6 +159,9 @@ function generatePTBubbleChart(){
         dataset_pt.push(bubble_pt);
       }
     }
+    generateTable('P-mana', mp_counts, 'table_mp');
+    generateTable('T-mana', mt_counts, 'table_mt');
+    generateTable('T-P', pt_counts, 'table_pt');
   }
 
   // chartdata
@@ -168,4 +210,5 @@ function generatePTBubbleChart(){
   window.mtBubbleChart = generateChart('chart_mtbubble', 'bubble', chartdata_mt, options_mt);
   window.ptBubbleChart = generateChart('chart_ptbubble', 'bubble', chartdata_pt, options_pt);
 
+  stats_initialized = true;
 }

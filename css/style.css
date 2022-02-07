@@ -97,30 +97,6 @@ body {
   /* background-color: rgba(40,40,40,1); */
 }
 
-
-.tabarea.active{
-  display: flex;
-}
-.tabarea{
-  display: none;
-}
-
-/* .tabmenu.active{
-  display: initial;
-}
-.tabmenu{
-  display: none;
-} */
-
-.tiertext{
-  text-align: right;
-  margin: 20px 1em 0 0;
-}
-
-.variations{
-  display: none;
-}
-
 /* side_menu */
 .side_menu{
   font-family: 'Roboto', sans-serif;
@@ -145,8 +121,38 @@ body {
 
 .stat_chart{
   background-color: rgba(20,20,20,0.7);
+  /* width: 50%;
+  box-sizing: border-box; */
   /* background-color: white; */
 }
+
+.stat_table{
+   width:100%;
+}
+
+.tabarea.active{
+  display: flex;
+}
+.tabarea{
+  display: none;
+}
+
+/* .tabmenu.active{
+  display: initial;
+}
+.tabmenu{
+  display: none;
+} */
+
+.tiertext{
+  text-align: right;
+  margin: 20px 1em 0 0;
+}
+
+.variations{
+  display: none;
+}
+
 
 
 .btn_menu{
