@@ -105,12 +105,12 @@ body {
   display: none;
 }
 
-.tabmenu.active{
+/* .tabmenu.active{
   display: initial;
 }
 .tabmenu{
   display: none;
-}
+} */
 
 
 .tiertext{
