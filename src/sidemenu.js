@@ -81,23 +81,28 @@ $('.checkall').change(function() {
 
      // result
      if (visible.every(value => value==true)){
-       $(o).show();
+       // $(o).show();
+       $(o).addClass('active');
      } else {
-       $(o).hide();
+       // $(o).hide();
+       $(o).removeClass('active');
      }
    })
+   // stat page
+   generateChartsAndTables();
 
  }
 
  function styleCheck(){
    // remove Untiered if no cards left anymore
-   console.log($('#cards_untiered').find('.card_div').length);
    if ($('#cards_untiered').find('.card_div').length==0){
      $('#area_untiered').hide();
    }
    // adjust bg height to scroll or window
-   scrollPx = $('#wrapper').height() + 'px';
-   $('.bg').css('height','max('+scrollPx+',100vh');
+   console.log($('#tier_contents').height());
+   scrollPxCards = $('#tier_contents').height() + 'px';
+   scrollPxStats = $('#statistics_contents').height() + 'px';
+   $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+',100vh');
  }
 
 
@@ -114,7 +119,7 @@ $('.checkall').change(function() {
    }
  });
 
-// inport tier data
+// import tier data
 function fileChanged(input){
   let reader = new FileReader();
   reader.readAsText(input.files[0])
