@@ -88,6 +88,7 @@ function jsonToCards(cardJson){
       img1Element.id = card.uuid // use same id to make parent draggable
       // hidden card parameters
       hrefImgElement.dataset.c_manacost = card.manaCost;
+      hrefImgElement.dataset.c_manavalue = card.manaValue;
       hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
       hrefImgElement.dataset.c_rarity = card.rarity;
       hrefImgElement.dataset.c_types = card.types;
