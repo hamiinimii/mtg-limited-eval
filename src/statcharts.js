@@ -38,14 +38,9 @@ function generateChart(chart_id, type, data, options){
   config['data'] = data;
   config['options'] = options;
   return new Chart($('#'+chart_id),config);
-  // console.log(eval('window.'+chart_name));
 }
 
 function generateTable(title, counts, wrapper){
-  // empty div
-  // $('#'+wrapper).children('div').remove();
-  // console.log(counts.length);
-  // debugger;
 
   let columns = [...Array(counts.length)].map((_, i) => i.toString()); // [ 0, 1, 2, 3, ...]
   columns.unshift(title);
@@ -71,7 +66,7 @@ function generateTable(title, counts, wrapper){
         }
       }
     }).render(document.getElementById(wrapper));
-  }else{
+  }else{ // second or later
     grids[wrapper].updateConfig({
       columns: columns,
       data: data
@@ -83,6 +78,11 @@ function generateChartsAndTables(){
   let mana_list = [];
   let power_list = [];
   let tough_list = [];
+  // two dimenional arrays
+  let mp_counts = [];
+  let mt_counts = [];
+  let pt_counts = [];
+
   let dataset_mp = [];
   let dataset_mt = [];
   let dataset_pt = [];
@@ -98,22 +98,22 @@ function generateChartsAndTables(){
     if (isNaN(power) && isNaN(toughness)){
       // console.log('not creature, skipped');
     }else{ // 0/0 is included
-      // console.log('with PT ' + power + '/' + toughness);
       mana_list.push(mana);
       power_list.push(power);
       tough_list.push(toughness);
     }
   })
 
+
   if (power_list.length && tough_list.length){ // if data is not null
+
     const mana_range = Math.max(...mana_list)+1;
     const power_range = Math.max(...power_list)+1;
     const tough_range = Math.max(...tough_list)+1;
-
     // two-dimentional arrays
-    let mp_counts = new Array(mana_range);
-    let mt_counts = new Array(mana_range);
-    let pt_counts = new Array(power_range);
+    mp_counts = new Array(mana_range);
+    mt_counts = new Array(mana_range);
+    pt_counts = new Array(power_range);
 
     for (let i=0; i<mp_counts.length; i++){
       mp_counts[i] = [...Array(power_range)].map(() => 0);
@@ -124,7 +124,6 @@ function generateChartsAndTables(){
     for (let i=0; i<pt_counts.length; i++){
       pt_counts[i] = [...Array(tough_range)].map(() => 0);
     }
-
     // count pairs
     for (let i=0; i<mana_list.length; i++){
       mp_counts[mana_list[i]][power_list[i]]++;
@@ -159,10 +158,15 @@ function generateChartsAndTables(){
         dataset_pt.push(bubble_pt);
       }
     }
-    generateTable('P-mana', mp_counts, 'table_mp');
-    generateTable('T-mana', mt_counts, 'table_mt');
-    generateTable('T-P', pt_counts, 'table_pt');
+  }else{
+    // two-dimentional arrays
+    mp_counts = [[0]];
+    mt_counts = [[0]];
+    pt_counts = [[0]];
   }
+  generateTable('mana-P', mp_counts, 'table_mp');
+  generateTable('mana-T', mt_counts, 'table_mt');
+  generateTable('P-T', pt_counts, 'table_pt');
 
   // chartdata
   const chartdata_mp = {
@@ -203,7 +207,6 @@ function generateChartsAndTables(){
     window.mpBubbleChart.destroy();
     window.mtBubbleChart.destroy();
     window.ptBubbleChart.destroy();
-    console.log("desroyed chart");
   }
   // generate chart
   window.mpBubbleChart = generateChart('chart_mpbubble', 'bubble', chartdata_mp, options_mp);
