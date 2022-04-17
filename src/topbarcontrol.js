@@ -25,10 +25,12 @@ $('.btn_pagename').click(function() {
     $('.card_div').each(function(i, o){
       if (target_area=='tiers') {
         const this_tier = '#cards_tier' + $(o).attr('data-tier');
-        // console.log(this_tier);
+        console.log(this_tier);
         $(o).appendTo(this_tier);
       } else if (target_area=='combat') {
         $(o).appendTo('#cards_uncombat');
+        // クリーチャ＾以外除きたいけど裏面クリーチャーもとりたい
+        // if ($(o).children) $(o).removeClass('active');
       }
     })
 

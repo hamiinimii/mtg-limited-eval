@@ -97,9 +97,9 @@
             <p class="area_text">Tier 6: Rarely Playable or Basically Unplayable</p>
             <div class="cards" id="cards_tier6" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
-          <section class="area" id="area_untiered" style="background-color: rgba(240,240,240, 0.6)">
+          <section class="area" id="area_tier0" style="background-color: rgba(240,240,240, 0.6)">
             <p class="area_text" style="color: rgba(70,70,70,1)">(Untiered)</p>
-            <div class="cards" id="cards_untiered"></div>
+            <div class="cards" id="cards_tier0" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
 
         </div>
@@ -129,19 +129,27 @@
         <div class="contents" id="combat_container">
           <div class="combat_cards">
             <section class="area compares" style="background-color: rgba(185,86,93, 0.7)">
-              <p class="area_text">It can...</p>
-              <div class="cards"  ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
+              <p class="area_text_left">It can...</p>
+              <div id="combat_param">
+                <div class="cards" id="card_combatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
+                <p class="">
+                  teste
+                </p>
+              </div>
             </section>
           </div>
           <div class="combat_cards">
             <section class="area compares" style="background-color: rgba(192,95,71, 0.7)">
               <p class="area_text">Defeat</p>
+              <div class="cards"></div>
             </section>
             <section class="area compares" style="background-color: rgba(130,150,130, 0.7)">
               <p class="area_text">Exchange</p>
+              <div class="cards"></div>
             </section>
             <section class="area compares" style="background-color: rgba(71,136,165, 0.7)">
               <p class="area_text">Chump</p>
+              <div class="cards"></div>
             </section>
           </div>
           <div class="combat_cards">
@@ -159,6 +167,7 @@
       <script type="text/javascript" src="./src/topbarcontrol.js"></script>
       <script type="text/javascript" src="./src/statcharts.js"></script>
       <script type="text/javascript" src="./src/setmanager.js"></script>
+      <script type="text/javascript" src="./src/combat.js"></script>
       <script type="text/javascript">
         $('input#setname').val(current_set);
         refreshSet(current_set);

@@ -112,6 +112,11 @@ body {
   /* background-color: rgba(40,40,40,1); */
 }
 
+#combat_param{
+  display: flex;
+  flex-direction: row;
+}
+
 #setname{
   font-family: 'Oswald', sans-serif;
   font-size: 2em;
@@ -186,6 +191,9 @@ body {
 .area_text{
   text-align: right;
   margin: 0 1em 0 0;
+}
+.area_text_left{
+  margin: 0 0 0 1em;
 }
 
 .variations{

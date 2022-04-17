@@ -16,7 +16,7 @@ function saveTier(object){
 function jsonToCards(cardJson){
 
   const tierElements = [
-    document.querySelector('#area_untiered > div'),
+    document.querySelector('#area_tier0 > div'),
     document.querySelector('#area_tier1 > div'),
     document.querySelector('#area_tier2 > div'),
     document.querySelector('#area_tier3 > div'),
@@ -24,7 +24,8 @@ function jsonToCards(cardJson){
     document.querySelector('#area_tier5 > div'),
     document.querySelector('#area_tier6 > div')
   ];
-  const combatElements = document.querySelector("#area_uncombat");
+  const uncombatElements = document.querySelector('#area_uncombat > div');
+  const combatElement = document.querySelector('#card_combatter');
 
   // clear cards when set is changed
   for (let i=0; i<tierElements.length; i++){
@@ -33,6 +34,17 @@ function jsonToCards(cardJson){
       elm.removeChild(elm.lastChild);
     }
   }
+  while(uncombatElements.lastChild){
+    while(uncombatElements.lastChild){
+      uncombatElements.removeChild(uncombatElements.lastChild);
+    }
+  }
+  while(combatElement.lastChild){
+    combatElement.removeChild(combatElement.lastChild);
+  }
+
+
+
 
   // load tier from localStorage
   cards_tier = loadTier();
@@ -121,7 +133,6 @@ function jsonToCards(cardJson){
     divCardElement.dataset.tier = cards_tier[card.uuid];
     // place card at specified tier
     const tier_int = parseInt(cards_tier[card.uuid]);
-    console.log(tier_int);
     tierElements[tier_int].appendChild(divCardElement);
 
   }

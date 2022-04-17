@@ -81,10 +81,8 @@ $('.checkall').change(function() {
 
      // result
      if (visible.every(value => value==true)){
-       // $(o).show();
        $(o).addClass('active');
      } else {
-       // $(o).hide();
        $(o).removeClass('active');
      }
    })
@@ -94,10 +92,6 @@ $('.checkall').change(function() {
  }
 
  function styleCheck(){
-   // remove Untiered if no cards left anymore
-   if ($('#cards_untiered').find('.card_div').length==0){
-     $('#area_untiered').hide();
-   }
    // adjust bg height to scroll or window
    scrollPxCards = $('#tier_contents').height() + 'px';
    scrollPxStats = $('#statistics_contents').height() + 'px';
