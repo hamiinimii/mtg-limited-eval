@@ -2,7 +2,6 @@ function activateDefaultTab(tabname){
   $('.btn_pagename.'+tabname).click();
 }
 
-
 // tabs buttons
 $('.btn_pagename').click(function() {
   $('.btn_pagename').each(function(i, o){
@@ -10,17 +9,31 @@ $('.btn_pagename').click(function() {
   })
   $(this).addClass('active');
 
-  let targetArea = $(this).attr('class').split(' ')[1];
-  current_tab=targetArea;
+  const target_area = $(this).attr('class').split(' ')[1];
 
   $('.tabarea').each(function(i, o){
-    if ($(o).hasClass(targetArea)) {
+    if ($(o).hasClass(target_area)) {
       $(o).addClass('active');
     }else{
       $(o).removeClass('active');
     }
   })
-  styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
+
+  if (current_tab!=target_area) { // run only if other tab than current is selected
+    current_tab=target_area;
+    // move cards to activated tabarea
+    $('.card_div').each(function(i, o){
+      if (target_area=='tiers') {
+        const this_tier = '#cards_tier' + $(o).attr('data-tier');
+        // console.log(this_tier);
+        $(o).appendTo(this_tier);
+      } else if (target_area=='combat') {
+        $(o).appendTo('#cards_uncombat');
+      }
+    })
+
+    styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
+  }
 });
 
 

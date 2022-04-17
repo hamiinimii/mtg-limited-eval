@@ -24,6 +24,7 @@ function jsonToCards(cardJson){
     document.querySelector('#area_tier5 > div'),
     document.querySelector('#area_tier6 > div')
   ];
+  const combatElements = document.querySelector("#area_uncombat");
 
   // clear cards when set is changed
   for (let i=0; i<tierElements.length; i++){
@@ -110,15 +111,17 @@ function jsonToCards(cardJson){
       divCardElement.className = 'card_div_var';
     }
 
-    divCardElement.appendChild(hrefImgElement);
     hrefImgElement.appendChild(img1Element);
+    divCardElement.appendChild(hrefImgElement);
 
-    // check tier
+    // check and register tier
     if (!(card.uuid in cards_tier)){
       cards_tier[card.uuid] = '0';
     }
-
-    let tier_int = parseInt(cards_tier[card.uuid]);
+    divCardElement.dataset.tier = cards_tier[card.uuid];
+    // place card at specified tier
+    const tier_int = parseInt(cards_tier[card.uuid]);
+    console.log(tier_int);
     tierElements[tier_int].appendChild(divCardElement);
 
   }

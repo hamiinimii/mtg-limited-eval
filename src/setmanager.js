@@ -2,7 +2,8 @@
 let gTimer;
 let set_list; // set list used grobally
 let current_set = 'SNC';
-let current_tab = 'tiers';
+// let current_tab = 'tiers';
+let current_tab = 'combat';
 
 function selectAll(target){
   target.select();
