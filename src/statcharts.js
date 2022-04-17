@@ -54,8 +54,6 @@ function generateTable(title, counts, wrapper){
   }
   // console.log(data);
   if (!stats_initialized){
-    console.log("initial pattern");
-    console.log($('#'+wrapper).find('div'));
     grids[wrapper] = new gridjs.Grid({
       columns: columns,
       data: data,

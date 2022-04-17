@@ -94,7 +94,32 @@ body {
   position: fixed;
   z-index: 999;
   display: flex;
+  width:100%;
   /* background-color: rgba(40,40,40,1); */
+}
+
+#setname{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2em;
+  margin-left: auto;
+  /* margin: 0 3px; */
+  padding: 0 3px;
+  height: 50px;
+  line-height: 50px;
+  border: 0px;
+  background-color: rgba(40,40,40,1);
+  color: white;
+
+  /* text area */
+  border-radius: 0;
+  text-align: center;
+  outline: none;
+  -webkit-appearance: none;
+  width: 2.5em;
+}
+#setname.inactive{
+  background-color: rgba(200,200,200,0.5);
+  color: rgba(80,80,80, 1);
 }
 
 /* side_menu */

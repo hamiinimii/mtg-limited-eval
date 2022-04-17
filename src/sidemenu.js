@@ -99,7 +99,6 @@ $('.checkall').change(function() {
      $('#area_untiered').hide();
    }
    // adjust bg height to scroll or window
-   console.log($('#tier_contents').height());
    scrollPxCards = $('#tier_contents').height() + 'px';
    scrollPxStats = $('#statistics_contents').height() + 'px';
    $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+',100vh');

@@ -1,8 +1,8 @@
 let cards_tier = {};
 
 function loadTier(){
-  if (localStorage.tiers){
-    return JSON.parse(localStorage.tiers);
+  if (localStorage.getItem(current_set)!=null){
+    return JSON.parse(localStorage.getItem(current_set));
   }else{
     return {};
   }
@@ -10,7 +10,8 @@ function loadTier(){
 
 function saveTier(object){
   let tiers = JSON.stringify(object);
-  localStorage.tiers = tiers;
+  // localStorage.tiers = tiers;
+  localStorage.setItem(current_set, tiers);
 }
 
 function jsonToCards(cardJson){
@@ -24,6 +25,14 @@ function jsonToCards(cardJson){
     document.querySelector('#area_tier5 > div'),
     document.querySelector('#area_tier6 > div')
   ];
+
+  // clear cards when set is changed
+  for (let i=0; i<tierElements.length; i++){
+    let elm = tierElements[i];
+    while(elm.lastChild){
+      elm.removeChild(elm.lastChild);
+    }
+  }
 
   // load tier from localStorage
   cards_tier = loadTier();
