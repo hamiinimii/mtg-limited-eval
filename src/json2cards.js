@@ -10,7 +10,6 @@ function loadTier(){
 
 function saveTier(object){
   let tiers = JSON.stringify(object);
-  // localStorage.tiers = tiers;
   localStorage.setItem(current_set, tiers);
 }
 
