@@ -18,7 +18,8 @@ body {
 }
 
 .bg {
-  background-image: url('https://images.ctfassets.net/s5n2t79q9icq/6dEUS6x1T4VD85vE6ltEfz/8fb899af1d42504cda6535db164a56e3/E8kKpHKnpV_1023x700.jpg');
+  /* background-image: url('https://images.ctfassets.net/s5n2t79q9icq/6dEUS6x1T4VD85vE6ltEfz/8fb899af1d42504cda6535db164a56e3/E8kKpHKnpV_1023x700.jpg'); */
+  background-image: url('https://images.ctfassets.net/s5n2t79q9icq/5iN5HPtJQmC220hUYcGmLt/1d2ff7f0490c72810f8fe1e8e69ecb20/djye24KjsldS_1023x700.jpg');
   background-size: cover;
   /* position: relative; */
   background-attachment: fixed;
@@ -99,7 +100,7 @@ body {
 }
 
 #setname{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 2em;
   margin-left: auto;
   /* margin: 0 3px; */
