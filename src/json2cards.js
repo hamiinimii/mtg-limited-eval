@@ -61,6 +61,9 @@ function jsonToCards(cardJson){
       }
     }
 
+    // skip Alchemy rebalanced cards
+    if (card.name.startsWith('A-')) continue;
+
     // restore data of back face of double faced cards
     if (card.layout=='transform') {
       if (card.side === 'b') {
