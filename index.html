@@ -25,7 +25,7 @@
       <!-- <div class="btn_pagename">DraftFan</div> -->
       <div class="btn_pagename tiers active"></a>Pick Tiers</div>
       <div class="btn_pagename statistics"></a>Statistics</div>
-
+      <input type="text" id="setname" onclick="selectAll(this)" oninput="inputText()"></input>
     </div>
     <!-- side menu to change parameters -->
     <div class="side_menu">
@@ -126,26 +126,12 @@
       <script type="text/javascript" src="./src/json2cards.js"></script>
       <script type="text/javascript" src="./src/dragdrop.js"></script>
       <script type="text/javascript" src="./src/sidemenu.js"></script>
-      <script type="text/javascript" src="./src/tabcontrol.js"></script>
+      <script type="text/javascript" src="./src/topbarcontrol.js"></script>
       <script type="text/javascript" src="./src/statcharts.js"></script>
+      <script type="text/javascript" src="./src/setmanager.js"></script>
       <script type="text/javascript">
-        // request json
-        // let requestURL = './data/NEO.json';
-        let requestURL = 'https://mtgjson.com/api/v5/NEO.json';
-        let request = new XMLHttpRequest();
-        request.open('GET', requestURL);
-        request.responseType = 'json';
-        request.send();
-
-        request.onload = function() {
-          const cardJson = request.response["data"]["cards"];
-          jsonToCards(cardJson);
-          filterChange();
-          activateDefaultTab('tiers');
-
-          styleCheck();
-          // console.log(cardJson);
-        }
+        $('input#setname').val(current_set);
+        refreshSet(current_set);
 
       </script>
 

@@ -11,13 +11,8 @@ $('.btn_pagename').click(function() {
   $(this).addClass('active');
 
   let targetArea = $(this).attr('class').split(' ')[1];
-  // $('.tabmenu').each(function(i, o){
-  //   if ($(o).hasClass(targetArea)) {
-  //     $(o).addClass('active');
-  //   }else{
-  //     $(o).removeClass('active');
-  //   }
-  // })
+  current_tab=targetArea;
+
   $('.tabarea').each(function(i, o){
     if ($(o).hasClass(targetArea)) {
       $(o).addClass('active');
@@ -26,4 +21,14 @@ $('.btn_pagename').click(function() {
     }
   })
   styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
+});
+
+
+// setname input
+$('input#setname').focusin(function(){
+  $(this).addClass('inactive');
+});
+
+$('input#setname').focusout(function(){
+  inputEnd();
 });
