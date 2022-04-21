@@ -7,6 +7,8 @@ function dragstart(event){
 function drop(event, tab){
   let dragged_id = event.dataTransfer.getData("text");
   let drag_elm = document.getElementById(dragged_id);
+  event.currentTarget.appendChild(drag_elm);
+  event.preventDefault(); // cancel drop event in order to avoid error
 
   // save tier data (refer to json2cards.js)
   if (tab=='tiers') {
@@ -15,11 +17,9 @@ function drop(event, tab){
     saveTier(cards_tier);
     // event.currentTarget.appendChild(drag_elm);
   } else if (tab=='combat') {
-    doCombat(drag_elm);
+    doCombat(dragged_id);
   }
 
-  event.currentTarget.appendChild(drag_elm);
-  event.preventDefault(); // cancel drop event in order to avoid error
 
   styleCheck();
 }

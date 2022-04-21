@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
     <!-- other styles -->
     <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
     <!-- CDN -->
@@ -130,32 +131,43 @@
           <div class="combat_cards">
             <section class="area compares" style="background-color: rgba(185,86,93, 0.7)">
               <p class="area_text_left">It can...</p>
-              <div id="combat_param">
+              <div id="combat_this">
                 <div class="cards" id="card_combatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
-                <p class="">
-                  teste
-                </p>
+                <div id="combat_keywords">
+                    <input type="image" src="img/icon_firststrike.png" height ="50" width="50"><p>First strike</p><br>
+                    <input type="image" src="img/icon_firststrike.png" height ="50" width="50">
+
+                  <div id="combat_param">
+                    <!-- <select name="strike" class="card_param" id="card_strike">
+                    <option value="0" selected>-</option>
+                    <option value="1">First strike</option>
+                    <option value="2">Double strike</option>
+                  </select> -->
+                  <input type="number" class="card_param" id="card_pt" name="this_power" value="0">/
+                  <input type="number" class="card_param" id="card_pt" name="this_tough" value="0">
+                  </div>
+                </div>
               </div>
             </section>
           </div>
           <div class="combat_cards">
             <section class="area compares" style="background-color: rgba(192,95,71, 0.7)">
               <p class="area_text">Defeat</p>
-              <div class="cards"></div>
+              <div class="cards" id="defeat"></div>
             </section>
             <section class="area compares" style="background-color: rgba(130,150,130, 0.7)">
               <p class="area_text">Exchange</p>
-              <div class="cards"></div>
+              <div class="cards" id="exchange"></div>
             </section>
             <section class="area compares" style="background-color: rgba(71,136,165, 0.7)">
               <p class="area_text">Chump</p>
-              <div class="cards"></div>
+              <div class="cards" id="chump"></div>
             </section>
           </div>
           <div class="combat_cards">
             <section class="area compares" id="area_uncombat" style="background-color: rgba(100,100,100, 0.6)">
               <p class="area_text">(Choose creature)</p>
-              <div class="cards" id="cards_uncombat"></div>
+              <div class="cards" id="unchanged"></div>
             </section>
           </div>
         </div>

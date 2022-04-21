@@ -84,7 +84,8 @@ function jsonToCards(cardJson){
           otherFaceIds: card.otherFaceIds,
           faceName: card.faceName,
           scryfallId: card.identifiers.scryfallId,
-          types: card.types
+          types: card.types,
+          keywords: card.keywords
         };
         if (card.power) backfaces[card.uuid]['power']=card.power;
         if (card.toughness) backfaces[card.uuid]['toughness']=card.toughness;
@@ -116,6 +117,8 @@ function jsonToCards(cardJson){
       hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
       hrefImgElement.dataset.c_rarity = card.rarity;
       hrefImgElement.dataset.c_types = card.types;
+      // hrefImgElement.dataset.c_keywords = card.keywords ? card.keywords : "noKeywords";
+      hrefImgElement.dataset.c_keywords = card.keywords;
       // pt does not refer back side now
       if (card.power) hrefImgElement.dataset.c_power = card.power;
       if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
@@ -145,6 +148,7 @@ function jsonToCards(cardJson){
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + data.scryfallId + '?format=image&face=back';
     hrefImgElement.dataset.lightbox = `card_${face_id}`;
     hrefImgElement.dataset.title = data.faceName;
+    hrefImgElement.dataset.c_keywords = data.keywords;
     hrefImgElement.dataset.c_power = data.power;
     hrefImgElement.dataset.c_toughness = data.toughness;
     hrefImgElement.dataset.c_types = data.types;

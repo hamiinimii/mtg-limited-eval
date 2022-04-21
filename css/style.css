@@ -74,7 +74,16 @@ body {
 .card_div{
   display:none;
 }
-
+#card_pt{
+  width: 1.2em;
+}
+#card_strike{
+  width: fit-content;
+}
+.card_param{
+  font-family: 'Cardo', serif;
+  font-size: 1.3em;
+}
 .chart_div {
   width: 50%;
   display: flex;
@@ -89,6 +98,20 @@ body {
   display: flex;
   flex-direction: column;
 }
+#combat_keywords {
+  display: block;
+  flex-direction: column;
+  width: 20em;
+}
+#combat_param{
+  display: flex;
+  align-items: flex-end;
+}
+#combat_this{
+  display: flex;
+  flex-direction: row;
+}
+
 .compares {
   width: 100%;
 }
@@ -112,10 +135,6 @@ body {
   /* background-color: rgba(40,40,40,1); */
 }
 
-#combat_param{
-  display: flex;
-  flex-direction: row;
-}
 
 #setname{
   font-family: 'Oswald', sans-serif;
