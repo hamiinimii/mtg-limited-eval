@@ -1,5 +1,29 @@
+let kw_manager = {
+  deathtouch: 0,
+  doublestrike: 0,
+  firststrike: 0,
+  indestructible: 0,
+  infect: 0
+}
+
+// keyword buttons
+$('.btn_keyword').click(function() {
+  let keyword = $(this).attr('id');
+  if (kw_manager[keyword]==0) { // off -> on
+    kw_manager[keyword] = 1;
+    $(this).addClass('active');
+    $(this).find('img').attr('src',"img/icon_"+keyword+".png");
+  } else { // on -> of
+    kw_manager[keyword] = 0;
+    $(this).removeClass('active');
+    $(this).find('img').attr('src', "img/icon_"+keyword+"_off.png");
+  }
+})
+
+
+
 function doCombat(card_id) {
-  card_id = '#'+card_id
+  card_id = '#'+card_id;
   // replace card
   if ($('#card_combatter > div').length >= 2) {
     $('#card_combatter div:first-child').appendTo('#unchanged');

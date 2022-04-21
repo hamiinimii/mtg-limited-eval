@@ -24,9 +24,9 @@
     <div class="headmenu">
       <div class="btn_menu"><span></span><span></span><span></span></div>
       <!-- <div class="btn_pagename">DraftFan</div> -->
-      <div class="btn_pagename tiers active"></a>Pick Tiers</div>
-      <div class="btn_pagename statistics"></a>Statistics</div>
-      <div class="btn_pagename combat"></a>Combat</div>
+      <div class="btn_pagename tiers active">Pick Tiers</div>
+      <div class="btn_pagename statistics">Statistics</div>
+      <div class="btn_pagename combat">Combat</div>
       <input type="text" id="setname" onclick="selectAll(this)" oninput="inputText()"></input>
     </div>
     <!-- side menu to change parameters -->
@@ -134,10 +134,29 @@
               <div id="combat_this">
                 <div class="cards" id="card_combatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
                 <div id="combat_keywords">
-                    <input type="image" src="img/icon_firststrike.png" height ="50" width="50"><p>First strike</p><br>
-                    <input type="image" src="img/icon_firststrike.png" height ="50" width="50">
+                  <div class="btn_keyword" id="deathtouch">
+                    <img src="img/icon_deathtouch_off.png" height ="25" width="25" alt="">
+                    Deathtouch
+                  </div>
+                  <div class="btn_keyword" id="doublestrike">
+                    <img src="img/icon_doublestrike_off.png" height ="25" width="25" alt="">
+                    Double strike
+                  </div>
+                  <div class="btn_keyword" id="firststrike">
+                    <img src="img/icon_firststrike_off.png" height ="25" width="25" alt="">
+                    First strike
+                  </div>
+                  <div class="btn_keyword" id="indestructible">
+                    <img src="img/icon_indestructible_off.png" height ="25" width="25" alt="">
+                    Indestructible
+                  </div>
+                  <div class="btn_keyword" id="infect">
+                    <img src="img/icon_infect_off.png" height ="25" width="25" alt="">
+                    Infect
+                  </div>
+                </div>
 
-                  <div id="combat_param">
+                <div id="combat_param">
                     <!-- <select name="strike" class="card_param" id="card_strike">
                     <option value="0" selected>-</option>
                     <option value="1">First strike</option>
@@ -145,7 +164,6 @@
                   </select> -->
                   <input type="number" class="card_param" id="card_pt" name="this_power" value="0">/
                   <input type="number" class="card_param" id="card_pt" name="this_tough" value="0">
-                  </div>
                 </div>
               </div>
             </section>
