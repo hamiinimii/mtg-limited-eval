@@ -1,120 +1,131 @@
-let kw_manager = {
-  deathtouch: 0,
-  doublestrike: 0,
-  firststrike: 0,
-  indestructible: 0,
-  infect: 0
+class Creature {
+  constructor() {
+    this.P = 0;
+    this.T = 0;
+    this.keywords = {};
+    this.damage = 0;
+    this.gets = [+0,+0]; // gets +X/+X
+    this.dead = 0;
+  }
+
+  dealDamage(enemy) { // enemy is Creature object
+    if (this.keywords.infect) {
+      enemy.gets[0] -= (this.P + this.gets[0]);
+      enemy.gets[1] -= (this.P + this.gets[0]);
+    } else {
+      enemy.damage += (this.P + this.gets[0]);
+    }
+    // check whether enemy died
+    if (enemy.T+enemy.gets[1]<=0) {
+      enemy.dead = 1; // enemy toughness <= 0
+    } else if (enemy.T+enemy.gets[1]-enemy.damage<=0 && !enemy.keywords.indestructible) {
+      enemy.dead = 1; // enemy was dealt damage greater than its tougness
+    }
+    // return enemy.dead;
+  }
+}
+
+let combatter_id = '';
+let modified_kw = {};
+const kw_dict = {
+  deathtouch: "Deathtouch",
+  doublestrike: "Double strike",
+  firststrike: "First strike",
+  indestructible: "Indestructible",
+  infect: "Infect"
 }
 
 // keyword buttons
 $('.btn_keyword').click(function() {
   let keyword = $(this).attr('id');
-  if (kw_manager[keyword]==0) { // off -> on
-    kw_manager[keyword] = 1;
-    $(this).addClass('active');
-    $(this).find('img').attr('src',"img/icon_"+keyword+".png");
-  } else { // on -> of
-    kw_manager[keyword] = 0;
+  // if (combatter.keywords[keyword]==true) { // on -> off
+  if ($(this).hasClass('active')) { // on -> off
     $(this).removeClass('active');
-    $(this).find('img').attr('src', "img/icon_"+keyword+"_off.png");
+    $(this).find('img').attr('src',"img/icon_"+keyword+"_off.png");
+    modified_kw[keyword] = false;
+  } else { // off -> on. keyword == 0 or undefined
+    $(this).addClass('active');
+    $(this).find('img').attr('src', "img/icon_"+keyword+".png");
+    modified_kw[keyword] = true;
+  }
+  if (combatter_id!=''){
+    let modi_combatter = prepareCombat(combatter_id, modified_kw);
+    doCombat(modi_combatter);
   }
 })
 
-
-
-function doCombat(card_id) {
-  card_id = '#'+card_id;
+function prepareCombat(card_id, modified_keywords={}) {
+  combatter_id = card_id;
   // replace card
   if ($('#card_combatter > div').length >= 2) {
     $('#card_combatter div:first-child').appendTo('#unchanged');
   }
-  // 破壊不能
-  // 感染
-  // プロテクション
-  // 接死
+  const combatter = new Creature(); // initialize combatter
+  // Find creature face. First found is used.
+  $('#'+card_id).children('a').each(function(i, o){ // fetch target card data
+    if ($(o).attr('data-c_types').includes('Creature')) {
+      combatter.P = parseInt($(o).attr('data-c_power'));
+      combatter.T = parseInt($(o).attr('data-c_toughness'));
 
+      const this_kw = $(o).attr('data-c_keywords');
+      // find c_keywords
+      for (let keyword in kw_dict) {
+        if (keyword in modified_keywords) { // modified keywords on UI is prioritized to card text
+          combatter.keywords[keyword] = modified_keywords[keyword];
+        } else if (this_kw.includes(kw_dict[keyword])) {
+          combatter.keywords[keyword] = true;
+        }
+      }
+      // console.log(combatter);
+
+      return false; // break;
+    }
+  })
+  return combatter;
+
+}
+
+function doCombat(combatter) {
   // compare P/T
-  let this_combat = [0, 0, 0]; // power, toughness, strike (0, 1st strike, double(2) strike)
-  let that_combat = [0, 0, 0];
-  let this_def_tough = 0;
-  let flag_kill = 0;
-  let flag_death = 0;
   let result = [
     ['#unchanged', '#chump'],
     ['#defeat', '#exchange']
   ];
 
-  $('#card_combatter div:first-child').children('a').each(function(i, o){ // fetch target card data
-    if ($(o).attr('data-c_types').includes('Creature')) {
-      this_combat[0] = parseInt($(o).attr('data-c_power'));
-      this_combat[1] = parseInt($(o).attr('data-c_toughness'));
-      this_def_tough = parseInt($(o).attr('data-c_toughness'));
-
-      if ($(o).attr('data-c_keywords').includes('First strike')){
-        this_combat[2] = 1;
-      } else if ($(o).attr('data-c_keywords').includes('Double strike')){
-        this_combat[2] = 2;
-        console.log("this double strike");
-      } else {
-        this_combat[2] = 0;
-      }
-      console.log('this_combat='+this_combat);
-      return false; // break;
-    }
-  })
-
-  $('#unchanged').children('.card_div').each(function(i, o) {
-    // initialize flags and toughness
-    flag_kill = 0;
-    flag_death = 0;
-    this_combat[1] = this_def_tough;
-
-    $(o).children('a').each(function(j, q) { // find a tag for card faces
-      console.log($(q).attr('data-title'));
+  $('#unchanged, #chump, #defeat, #exchange').children('.card_div').each(function(j, p) {
+    const combatted = new Creature(); // initialize combatted
+    $(p).children('a').each(function(k, q) { // find a tag for card faces
+      // console.log($(q).attr('data-title'));
       if ($(q).attr('data-c_types').includes('Creature')) {
-        that_combat[0] = parseInt($(q).attr('data-c_power')); // set power
-        that_combat[1] = parseInt($(q).attr('data-c_toughness')); // set toughness
-        if ($(q).attr('data-c_keywords').includes('First strike')){
-          that_combat[2] = 1;
-        } else if ($(q).attr('data-c_keywords').includes('Double strike')){
-          that_combat[2] = 2;
-          console.log("that double strike");
-        } else {
-          that_combat[2] = 0;
+        combatted.P = parseInt($(q).attr('data-c_power')); // set power
+        combatted.T = parseInt($(q).attr('data-c_toughness')); // set toughness
+
+        const that_kw = $(q).attr('data-c_keywords');
+        // find c_keywords
+        for (let keyword in kw_dict) {
+          if (that_kw.includes(kw_dict[keyword])) combatted.keywords[keyword] = 1;
         }
-        console.log("that pt = "+that_combat);
+
+        // reset combatter state
+        combatter.damage = 0;
+        combatter.gets = [0, 0];
+        combatter.dead = 0;
+
         // first damage step
-        if (this_combat[2]>=1){
-          that_combat[1] -= this_combat[0]; // deal damage to toughness
-          // console.log("that combat tough = " + that_combat[1]);
-          flag_kill = (that_combat[1]<=0) ? 1 : 0;
-        }
-        if (that_combat[2]>=1){
-          this_combat[1] -= that_combat[0]; // deal damage to toughness
-          flag_death = (this_combat[1]<=0) ? 1 : 0;
-        }
-        console.log("first combat, kill="+flag_kill +", death="+flag_death);
+        if (combatter.keywords.firststrike || combatter.keywords.doublestrike) combatter.dealDamage(combatted);
+        if (combatted.keywords.firststrike || combatted.keywords.doublestrike) combatted.dealDamage(combatter);
+
         // second damage step
-        if (!flag_kill && !flag_death) { // if combat did not end at first damage step
-          console.log("second damage step");
-          if (this_combat[2]!=1){ // not first strike
-            that_combat[1] -= this_combat[0]; // deal damage to toughness
-            console.log("result, that toughness="+that_combat[1]);
-            flag_kill = (that_combat[1]<=0) ? 1 : 0;
-          }
-          if (that_combat[2]!=1){ // not first strike
-            this_combat[1] -= that_combat[0]; // deal damage to toughness
-            console.log("result, this toughness="+this_combat[1]);
-            flag_death = (this_combat[1]<=0) ? 1 : 0;
-          }
+        if (!combatter.dead && !combatted.dead) { // if combat did not end at first damage step
+          if (!combatter.keywords.firststrike) combatter.dealDamage(combatted);
+          if (!combatted.keywords.firststrike) combatted.dealDamage(combatter);
         }
-        return false; // see no more face
+        // move card to the result area
+        $(p).appendTo(result[combatted.dead][combatter.dead]);
+
+        return false; // see no more face of combatted
       }
     })
-    // move card to the result area
-    console.log("kill="+flag_kill +", death="+flag_death);
-    $(o).appendTo(result[flag_kill][flag_death]);
   })
-
 
 }

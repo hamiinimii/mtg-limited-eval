@@ -17,7 +17,8 @@ function drop(event, tab){
     saveTier(cards_tier);
     // event.currentTarget.appendChild(drag_elm);
   } else if (tab=='combat') {
-    doCombat(dragged_id);
+    let combatter = prepareCombat(dragged_id);
+    doCombat(combatter);
   }
 
 
