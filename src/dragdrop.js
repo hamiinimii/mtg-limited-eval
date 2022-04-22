@@ -4,15 +4,23 @@ function dragstart(event){
 }
 
 // drop
-function drop(event){
-  var dragged_id = event.dataTransfer.getData("text");
-  var drag_elm = document.getElementById(dragged_id);
+function drop(event, tab){
+  let dragged_id = event.dataTransfer.getData("text");
+  let drag_elm = document.getElementById(dragged_id);
   event.currentTarget.appendChild(drag_elm);
   event.preventDefault(); // cancel drop event in order to avoid error
 
   // save tier data (refer to json2cards.js)
-  cards_tier[dragged_id] = event.currentTarget.id.slice(-1);
-  saveTier(cards_tier);
+  if (tab=='tiers') {
+    cards_tier[dragged_id] = event.currentTarget.id.slice(-1);
+    drag_elm.dataset.tier = cards_tier[dragged_id];
+    saveTier(cards_tier);
+  } else if (tab=='combat') {
+    resetKwButtons();
+    let combatter = prepareCombat(dragged_id);
+    doCombat(combatter);
+  }
+
 
   styleCheck();
 }

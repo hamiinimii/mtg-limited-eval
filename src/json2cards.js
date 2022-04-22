@@ -16,7 +16,7 @@ function saveTier(object){
 function jsonToCards(cardJson){
 
   const tierElements = [
-    document.querySelector('#area_untiered > div'),
+    document.querySelector('#area_tier0 > div'),
     document.querySelector('#area_tier1 > div'),
     document.querySelector('#area_tier2 > div'),
     document.querySelector('#area_tier3 > div'),
@@ -24,6 +24,8 @@ function jsonToCards(cardJson){
     document.querySelector('#area_tier5 > div'),
     document.querySelector('#area_tier6 > div')
   ];
+  const uncombatElements = document.querySelector('#area_uncombat > div');
+  const combatElement = document.querySelector('#card_combatter');
 
   // clear cards when set is changed
   for (let i=0; i<tierElements.length; i++){
@@ -32,6 +34,17 @@ function jsonToCards(cardJson){
       elm.removeChild(elm.lastChild);
     }
   }
+  while(uncombatElements.lastChild){
+    while(uncombatElements.lastChild){
+      uncombatElements.removeChild(uncombatElements.lastChild);
+    }
+  }
+  while(combatElement.lastChild){
+    combatElement.removeChild(combatElement.lastChild);
+  }
+
+
+
 
   // load tier from localStorage
   cards_tier = loadTier();
@@ -71,7 +84,8 @@ function jsonToCards(cardJson){
           otherFaceIds: card.otherFaceIds,
           faceName: card.faceName,
           scryfallId: card.identifiers.scryfallId,
-          types: card.types
+          types: card.types,
+          keywords: card.keywords
         };
         if (card.power) backfaces[card.uuid]['power']=card.power;
         if (card.toughness) backfaces[card.uuid]['toughness']=card.toughness;
@@ -103,6 +117,8 @@ function jsonToCards(cardJson){
       hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
       hrefImgElement.dataset.c_rarity = card.rarity;
       hrefImgElement.dataset.c_types = card.types;
+      // hrefImgElement.dataset.c_keywords = card.keywords ? card.keywords : "noKeywords";
+      hrefImgElement.dataset.c_keywords = card.keywords;
       // pt does not refer back side now
       if (card.power) hrefImgElement.dataset.c_power = card.power;
       if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
@@ -110,15 +126,17 @@ function jsonToCards(cardJson){
       divCardElement.className = 'card_div_var';
     }
 
-    divCardElement.appendChild(hrefImgElement);
     hrefImgElement.appendChild(img1Element);
+    divCardElement.appendChild(hrefImgElement);
 
-    // check tier
+    // check and register tier
     if (!(card.uuid in cards_tier)){
       cards_tier[card.uuid] = '0';
     }
-
-    let tier_int = parseInt(cards_tier[card.uuid]);
+    divCardElement.dataset.tier = cards_tier[card.uuid];
+    divCardElement.dataset.combat = 'unchanged';
+    // place card at specified tier
+    const tier_int = parseInt(cards_tier[card.uuid]);
     tierElements[tier_int].appendChild(divCardElement);
 
   }
@@ -131,6 +149,7 @@ function jsonToCards(cardJson){
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + data.scryfallId + '?format=image&face=back';
     hrefImgElement.dataset.lightbox = `card_${face_id}`;
     hrefImgElement.dataset.title = data.faceName;
+    hrefImgElement.dataset.c_keywords = data.keywords;
     hrefImgElement.dataset.c_power = data.power;
     hrefImgElement.dataset.c_toughness = data.toughness;
     hrefImgElement.dataset.c_types = data.types;

@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
     <!-- other styles -->
     <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
     <!-- CDN -->
@@ -23,8 +24,9 @@
     <div class="headmenu">
       <div class="btn_menu"><span></span><span></span><span></span></div>
       <!-- <div class="btn_pagename">DraftFan</div> -->
-      <div class="btn_pagename tiers active"></a>Pick Tiers</div>
-      <div class="btn_pagename statistics"></a>Statistics</div>
+      <div class="btn_pagename tiers active">Pick Tiers</div>
+      <div class="btn_pagename statistics">Statistics</div>
+      <div class="btn_pagename combat">Combat</div>
       <input type="text" id="setname" onclick="selectAll(this)" oninput="inputText()"></input>
     </div>
     <!-- side menu to change parameters -->
@@ -73,37 +75,38 @@
         <div class="contents">
           <!-- where cards appear -->
           <section class="area" id="area_tier1" style="background-color: rgba(225,199,127, 0.7)">
-            <p class="tiertext">Tier 1: Incredible Bombs</p>
-            <div class="cards" id="cards_tier1" ondrop="drop(event)" ondragover="dragover(event)"></div>
+            <p class="area_text">Tier 1: Incredible Bombs</p>
+            <div class="cards" id="cards_tier1" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
-          <section class="area" id="area_tier2" style="background-color: rgba(213,213,210, 0.67)">
-            <p class="tiertext">Tier 2: Great First Picks</p>
-            <div class="cards" id="cards_tier2" ondrop="drop(event)" ondragover="dragover(event)"></div>
+          <section class="area" id="area_tier2" style="background-color: rgba(213,213,210, 0.7)">
+            <p class="area_text">Tier 2: Great First Picks</p>
+            <div class="cards" id="cards_tier2" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
           <section class="area" id="area_tier3" style="background-color: rgba(216,171,126, 0.7)">
-            <p class="tiertext">Tier 3: Above Average Cards</p>
-            <div class="cards" id="cards_tier3" ondrop="drop(event)" ondragover="dragover(event)"></div>
+            <p class="area_text">Tier 3: Above Average Cards</p>
+            <div class="cards" id="cards_tier3" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
           <section class="area" id="area_tier4" style="background-color: rgba(190,205,180, 0.7)">
-            <p class="tiertext">Tier 4: Solid Playables</p>
-            <div class="cards" id="cards_tier4" ondrop="drop(event)" ondragover="dragover(event)"></div>
+            <p class="area_text">Tier 4: Solid Playables</p>
+            <div class="cards" id="cards_tier4" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
           <section class="area" id="area_tier5" style="background-color: rgba(170,170,190, 0.7)">
-            <p class="tiertext">Tier 5: Sometimes Playable</p>
-            <div class="cards" id="cards_tier5" ondrop="drop(event)" ondragover="dragover(event)"></div>
+            <p class="area_text">Tier 5: Sometimes Playable</p>
+            <div class="cards" id="cards_tier5" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
           <section class="area" id="area_tier6" style="background-color: rgba(120,120,120, 0.7)">
-            <p class="tiertext">Tier 6: Rarely Playable or Basically Unplayable</p>
-            <div class="cards" id="cards_tier6" ondrop="drop(event)" ondragover="dragover(event)"></div>
+            <p class="area_text">Tier 6: Rarely Playable or Basically Unplayable</p>
+            <div class="cards" id="cards_tier6" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
-          <section class="area" id="area_untiered" style="background-color: rgba(240,240,240, 0.6)">
-            <p class="tiertext" style="color: rgba(70,70,70,1)">(Untiered)</p>
-            <div class="cards" id="cards_untiered"></div>
+          <section class="area" id="area_tier0" style="background-color: rgba(240,240,240, 0.6)">
+            <p class="area_text" style="color: rgba(70,70,70,1)">(Untiered)</p>
+            <div class="cards" id="cards_tier0" ondrop="drop(event,'tiers')" ondragover="dragover(event)"></div>
           </section>
 
         </div>
       </article>
 
+      <!-- area for statistic charts -->
       <article id="statistics_contents" class="statistics tabarea">
         <div class="contents">
           <div class="chart_zone">
@@ -123,12 +126,73 @@
         </div>
       </article>
 
+      <article id="combat_contents" class="combat tabarea">
+        <div class="contents" id="combat_container">
+          <div class="combat_cards">
+            <section class="area compares" style="background-color: rgba(205,95,100, 0.7)">
+              <p class="area_text_left">It can...</p>
+              <div id="combat_this">
+                <div class="cards" id="card_combatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
+                <div id="combat_keywords">
+                  <div class="btn_keyword" id="deathtouch">
+                    <img src="img/icon_deathtouch_off.png" height ="25" width="25" alt="">
+                    Deathtouch
+                  </div>
+                  <div class="btn_keyword" id="doublestrike">
+                    <img src="img/icon_doublestrike_off.png" height ="25" width="25" alt="">
+                    Double strike
+                  </div>
+                  <div class="btn_keyword" id="firststrike">
+                    <img src="img/icon_firststrike_off.png" height ="25" width="25" alt="">
+                    First strike
+                  </div>
+                  <div class="btn_keyword" id="indestructible">
+                    <img src="img/icon_indestructible_off.png" height ="25" width="25" alt="">
+                    Indestructible
+                  </div>
+                  <div class="btn_keyword" id="infect">
+                    <img src="img/icon_infect_off.png" height ="25" width="25" alt="">
+                    Infect
+                  </div>
+                </div>
+
+                <div id="combat_param">
+                  <input type="number" class="input_cardparam" id="pow" name="this_power" min="0" value="0">/
+                  <input type="number" class="input_cardparam" id="tgh" name="this_tough" min="0" value="0">
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="combat_cards">
+            <section class="area compares" style="background-color: rgba(192,95,71, 0.7)">
+              <p class="area_text">Defeat</p>
+              <div class="cards" id="defeat"></div>
+            </section>
+            <section class="area compares" style="background-color: rgba(130,150,130, 0.7)">
+              <p class="area_text">Exchange</p>
+              <div class="cards" id="exchange"></div>
+            </section>
+            <section class="area compares" style="background-color: rgba(71,136,165, 0.7)">
+              <p class="area_text">Chump</p>
+              <div class="cards" id="chump"></div>
+            </section>
+          </div>
+          <div class="combat_cards">
+            <section class="area compares" id="area_uncombat" style="background-color: rgba(100,100,100, 0.6)">
+              <p class="area_text">(Choose creature)</p>
+              <div class="cards" id="unchanged"></div>
+            </section>
+          </div>
+        </div>
+      </article>
+
       <script type="text/javascript" src="./src/json2cards.js"></script>
       <script type="text/javascript" src="./src/dragdrop.js"></script>
       <script type="text/javascript" src="./src/sidemenu.js"></script>
       <script type="text/javascript" src="./src/topbarcontrol.js"></script>
       <script type="text/javascript" src="./src/statcharts.js"></script>
       <script type="text/javascript" src="./src/setmanager.js"></script>
+      <script type="text/javascript" src="./src/combat.js"></script>
       <script type="text/javascript">
         $('input#setname').val(current_set);
         refreshSet(current_set);
