@@ -15,7 +15,6 @@ function drop(event, tab){
     cards_tier[dragged_id] = event.currentTarget.id.slice(-1);
     drag_elm.dataset.tier = cards_tier[dragged_id];
     saveTier(cards_tier);
-    // event.currentTarget.appendChild(drag_elm);
   } else if (tab=='combat') {
     resetKwButtons();
     let combatter = prepareCombat(dragged_id);

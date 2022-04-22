@@ -29,7 +29,6 @@ $('.btn_pagename').click(function() {
       } else if (target_area=='combat') {
         $(o).children('a').each(function(j, q){
           const this_combat = '#' + $(o).attr('data-combat');
-          console.log(this_combat);
           if ($(q).attr('data-c_types').includes('Creature')) $(o).appendTo(this_combat);
         })
       }

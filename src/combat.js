@@ -58,7 +58,6 @@ $('.btn_keyword').click(function() {
 })
 
 $('.input_cardparam').change(function() {
-  console.log($(this).val());
   modified_param[$(this).attr('id')] = parseInt($(this).val());
   let modi_combatter = prepareCombat(combatter_id, modified_param);
   doCombat(modi_combatter);
@@ -66,7 +65,6 @@ $('.input_cardparam').change(function() {
 
 function prepareCombat(card_id, modifi={pow:-1, tgh:-1, keywords:{}}) {
   combatter_id = card_id;
-  console.log(modifi);
   // replace card
   if ($('#card_combatter > div').length >= 2) {
     $('#card_combatter div:first-child').appendTo('#unchanged');
@@ -101,7 +99,6 @@ function prepareCombat(card_id, modifi={pow:-1, tgh:-1, keywords:{}}) {
           $('#'+keyword).trigger('click');
         }
       }
-      // console.log(combatter);
 
       return false; // break;
     }
@@ -120,7 +117,6 @@ function doCombat(combatter) {
   $('#unchanged, #chump, #defeat, #exchange').children('.card_div').each(function(j, p) {
     const combatted = new Creature(); // initialize combatted
     $(p).children('a').each(function(k, q) { // find a tag for card faces
-      // console.log($(q).attr('data-title'));
       if ($(q).attr('data-c_types').includes('Creature')) {
         combatted.P = parseInt($(q).attr('data-c_power')); // set power
         combatted.T = parseInt($(q).attr('data-c_toughness')); // set toughness
