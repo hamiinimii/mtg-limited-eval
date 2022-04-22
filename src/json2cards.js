@@ -134,6 +134,7 @@ function jsonToCards(cardJson){
       cards_tier[card.uuid] = '0';
     }
     divCardElement.dataset.tier = cards_tier[card.uuid];
+    divCardElement.dataset.combat = 'unchanged';
     // place card at specified tier
     const tier_int = parseInt(cards_tier[card.uuid]);
     tierElements[tier_int].appendChild(divCardElement);

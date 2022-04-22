@@ -146,16 +146,12 @@ body {
 .card_div{
   display:none;
 }
-#card_pt{
-  width: 1.2em;
-}
+/* #card_pt{
+} */
 #card_strike{
   width: fit-content;
 }
-.card_param{
-  font-family: 'Cardo', serif;
-  font-size: 1.3em;
-}
+
 .chart_div {
   width: 50%;
   display: flex;
@@ -214,6 +210,11 @@ body {
   /* background-color: rgba(40,40,40,1); */
 }
 
+.input_cardparam{
+  font-family: 'Cardo', serif;
+  font-size: 1.3em;
+  width: 1.6em;
+}
 
 #setname{
   font-family: 'Oswald', sans-serif;
