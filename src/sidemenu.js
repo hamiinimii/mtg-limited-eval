@@ -93,6 +93,8 @@ $('.checkall').change(function() {
    $('#card_combatter').children('.card_div').each(function(){
      $(this).addClass('active');
    })
+   // count numbers
+   updateCounts();
  }
 
  function styleCheck(){

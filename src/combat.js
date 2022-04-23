@@ -217,7 +217,7 @@ function resetCombatCards() {
 function updateCounts() {
   // count numbers
   for (let key in result_text) {
-    let count = $('#'+key+' .card_div').length >= 1 ? ": "+$('#'+key+' .card_div').length : ''
+    let count = $('#'+key+' .card_div').length >= 1 ? ": "+$('#'+key+' .card_div.active').length : ''
     $('#text_'+key).text(result_text[key] + count);
   }
 }
