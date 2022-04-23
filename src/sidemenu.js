@@ -86,13 +86,13 @@ $('.checkall').change(function() {
        $(o).removeClass('active');
      }
    })
-   // combatter is visible
+   // stat page
+   generateChartsAndTables();
+
+   // combatter is visible. Not listed to charts/tables
    $('#card_combatter').children('.card_div').each(function(){
      $(this).addClass('active');
    })
-
-   // stat page
-   generateChartsAndTables();
 
  }
 
