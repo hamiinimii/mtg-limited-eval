@@ -21,23 +21,21 @@ $('.btn_pagename').click(function() {
     }
   })
 
-  // if (current_tab!=target_area) { // run only if other tab than current is selected
-    current_tab=target_area;
-    // move cards to activated tabarea
-    $('.card_div').each(function(i, o){
-      if (target_area=='tiers') {
-        const this_tier = '#cards_tier' + $(o).attr('data-tier');
-        $(o).appendTo(this_tier);
-      } else if (target_area=='combat') {
-        $(o).children('a').each(function(j, q){
-          const this_combat = '#' + $(o).attr('data-combat');
-          if ($(q).attr('data-c_types').includes('Creature')) $(o).appendTo(this_combat);
-        })
-      }
-    })
+  current_tab=target_area;
+  // move cards to activated tabarea
+  $('.card_div').each(function(i, o){
+    if (target_area=='tiers') {
+      const this_tier = '#cards_tier' + $(o).attr('data-tier');
+      $(o).appendTo(this_tier);
+    } else if (target_area=='combat') {
+      $(o).children('a').each(function(j, q){
+        const this_combat = '#' + $(o).attr('data-combat');
+        if ($(q).attr('data-c_types').includes('Creature')) $(o).appendTo(this_combat);
+      })
+    }
+  })
 
-    styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
-  // }
+  styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
 });
 
 

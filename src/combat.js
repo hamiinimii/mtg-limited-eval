@@ -23,7 +23,6 @@ class Creature {
     } else if (enemy.damage>=1 && this.keywords.deathtouch && !enemy.keywords.indestructible) {
       enemy.dead = 1; // deathtouch
     }
-    // return enemy.dead;
   }
 }
 
@@ -88,6 +87,7 @@ $('.btn_closecombatter').click(function() {
     resetCombatCards();
   }
   $(this).find('img').attr('src', "img/icon_close_off.png");
+  updateCounts();
 })
 
 function prepareCombat(card_id, modifi={pow:-1, tgh:-1, keywords:{}}) {
@@ -129,21 +129,26 @@ function prepareCombat(card_id, modifi={pow:-1, tgh:-1, keywords:{}}) {
           $('#'+keyword).trigger('click');
         }
       }
-
       return false; // break;
     }
   })
   return combatter;
-
 }
+
+// consts for doCombat
+const result_id = [
+  ['unchanged', 'chump'],
+  ['defeat', 'exchange']
+];
+const result_text = {
+  unchanged: $('#text_unchanged').text(),
+  chump:     $('#text_chump').text(),
+  defeat:    $('#text_defeat').text(),
+  exchange:  $('#text_exchange').text()
+};
 
 function doCombat(combatter) {
   // compare P/T
-  let result = [
-    ['unchanged', 'chump'],
-    ['defeat', 'exchange']
-  ];
-
   $('#unchanged, #chump, #defeat, #exchange').children('.card_div').each(function(j, p) {
     const combatted = new Creature(); // initialize combatted
     $(p).children('a').each(function(k, q) { // find a tag for card faces
@@ -178,14 +183,16 @@ function doCombat(combatter) {
           if (!combatted.keywords.firststrike) combatted.dealDamage(combatter);
         }
         // move card to the result area
-        $(p).appendTo('#'+result[combatted.dead][combatter.dead]);
-        $(p).attr('data-combat', result[combatted.dead][combatter.dead]);
+        $(p).appendTo('#'+result_id[combatted.dead][combatter.dead]);
+        $(p).attr('data-combat', result_id[combatted.dead][combatter.dead]);
 
         return false; // see no more face of combatted
       }
     })
   })
 
+  // count numbers
+  updateCounts();
 }
 
 function resetKwAndPT() {
@@ -205,4 +212,12 @@ function resetCombatCards() {
       if ($(q).attr('data-c_types').includes('Creature')) $(o).appendTo('#unchanged');
     })
   })
+}
+
+function updateCounts() {
+  // count numbers
+  for (let key in result_text) {
+    let count = $('#'+key+' .card_div').length >= 1 ? ": "+$('#'+key+' .card_div').length : ''
+    $('#text_'+key).text(result_text[key] + count);
+  }
 }

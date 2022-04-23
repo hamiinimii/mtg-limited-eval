@@ -93,7 +93,6 @@ $('.checkall').change(function() {
    $('#card_combatter').children('.card_div').each(function(){
      $(this).addClass('active');
    })
-
  }
 
  function styleCheck(){
@@ -103,7 +102,6 @@ $('.checkall').change(function() {
    scrollPxCombs = $('#combat_contents').height() + 'px';
    $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+','+scrollPxCombs+',100vh');
  }
-
 
  // export tier data
  $('#btn_export').on('click', () => {
