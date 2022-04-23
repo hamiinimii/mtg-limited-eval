@@ -33,8 +33,10 @@ const kw_dict = {
   deathtouch: "Deathtouch",
   doublestrike: "Double strike",
   firststrike: "First strike",
+  flying: "Flying",
   indestructible: "Indestructible",
-  infect: "Infect"
+  infect: "Infect",
+  reach: "Reach"
 }
 
 // keyword buttons
@@ -51,7 +53,6 @@ $('.btn_keyword').click(function() {
     modified_param.keywords[keyword] = true;
   }
   if (combatter_id != ''){
-    // $('#'+combatter_id).appendTo("#card_combatter");
     let modi_combatter = prepareCombat(combatter_id, modified_param);
     doCombat(modi_combatter);
   }
@@ -67,6 +68,10 @@ $('.btn_attackblock').click(function() {
     $(this).addClass('attack');
     // $(this).find('img').attr('src',"img/icon_attack.png");
     $(this).html('<img src="img/icon_attack.png" height ="25" width="25" alt="">Attack')
+  }
+  if (combatter_id != ''){
+    let modi_combatter = prepareCombat(combatter_id, modified_param);
+    doCombat(modi_combatter);
   }
 })
 
@@ -157,9 +162,14 @@ function doCombat(combatter) {
           if (that_kw.includes(kw_dict[keyword])) combatted.keywords[keyword] = true;
         }
         // flier cannot be blocked except for by fliers or reachers
-        // if ($('btn_attackblock').hasClass('attack') && combatter.keywords['flying']) {
-        //
-        // }
+        if (($('.btn_attackblock').hasClass('attack') && combatter.keywords.flying && !(combatted.keywords.flying || combatted.keywords.reach)) // attacking and flying
+         || !($('.btn_attackblock').hasClass('attack')) && !(combatter.keywords.flying || combatter.keywords.reach) && combatted.keywords.flying) { // blocking and enemy is flying
+        // if ($('.btn_attackblock').hasClass('attack')) {
+          console.log("cannot block flier");
+          $(p).appendTo('#unchanged');
+          $(p).attr('data-combat', '#unchanged');
+          return false;
+        }
         // reset combatter state
         combatter.damage = 0;
         combatter.gets = [0, 0];
