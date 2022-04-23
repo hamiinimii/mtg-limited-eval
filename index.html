@@ -129,11 +129,18 @@
       <article id="combat_contents" class="combat tabarea">
         <div class="contents" id="combat_container">
           <div class="combat_cards">
-            <section class="area compares" style="background-color: rgba(205,95,100, 0.7)">
+            <section class="area" id="area_combatter" style="background-color: rgba(205,95,100, 0.7); position:relative">
+              <div class="btn_closecombatter">
+                <img src="img/icon_close_off.png" height ="17" width="17">
+              </div>
               <p class="area_text_left">It can...</p>
               <div id="combat_this">
                 <div class="cards" id="card_combatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
-                <div id="combat_keywords">
+                <div class="btn_attackblock attack" id="combat_attackblock">
+                  <img src="img/icon_attack.png" height ="25" width="25" alt="">
+                  Attack
+                </div>
+                <div id="combat_keywords1">
                   <div class="btn_keyword" id="deathtouch">
                     <img src="img/icon_deathtouch_off.png" height ="25" width="25" alt="">
                     Deathtouch
@@ -146,6 +153,12 @@
                     <img src="img/icon_firststrike_off.png" height ="25" width="25" alt="">
                     First strike
                   </div>
+                  <div class="btn_keyword" id="flying">
+                    <img src="img/icon_flying_off.png" height ="25" width="25" alt="">
+                    Flying
+                  </div>
+                </div>
+                <div class="combat_keywords2">
                   <div class="btn_keyword" id="indestructible">
                     <img src="img/icon_indestructible_off.png" height ="25" width="25" alt="">
                     Indestructible
@@ -153,6 +166,10 @@
                   <div class="btn_keyword" id="infect">
                     <img src="img/icon_infect_off.png" height ="25" width="25" alt="">
                     Infect
+                  </div>
+                  <div class="btn_keyword" id="reach">
+                    <img src="img/icon_reach_off.png" height ="25" width="25" alt="">
+                    Reach
                   </div>
                 </div>
 
@@ -162,25 +179,31 @@
                 </div>
               </div>
             </section>
-          </div>
-          <div class="combat_cards">
+          <!-- </div> -->
+          <div class="combatted_cards">
             <section class="area compares" style="background-color: rgba(192,95,71, 0.7)">
-              <p class="area_text">Defeat</p>
+              <p class="area_text" id="text_defeat">Defeat</p>
               <div class="cards" id="defeat"></div>
             </section>
             <section class="area compares" style="background-color: rgba(130,150,130, 0.7)">
-              <p class="area_text">Exchange</p>
+              <p class="area_text" id="text_exchange">Exchange</p>
               <div class="cards" id="exchange"></div>
             </section>
             <section class="area compares" style="background-color: rgba(71,136,165, 0.7)">
-              <p class="area_text">Chump</p>
+              <p class="area_text" id="text_chump">Chump</p>
               <div class="cards" id="chump"></div>
             </section>
           </div>
-          <div class="combat_cards">
+          <!-- <div class="combat_cards"> -->
             <section class="area compares" id="area_uncombat" style="background-color: rgba(100,100,100, 0.6)">
-              <p class="area_text">(Choose creature)</p>
+              <p class="area_text" id="text_unchanged">Nothing happens or cannot block</p>
               <div class="cards" id="unchanged"></div>
+            </section>
+            <section class="area compares" id="area_setcombatter" style="background-color: rgba(120,100,100, 0.6)">
+              <div style="margin:5px 0 0 5px;">
+                <img src="img/icon_combat.png" height ="25" width="25" alt="">
+              </div>
+              <div class="cards" id="setcombatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
             </section>
           </div>
         </div>

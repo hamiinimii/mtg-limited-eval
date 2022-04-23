@@ -89,15 +89,19 @@ $('.checkall').change(function() {
    // stat page
    generateChartsAndTables();
 
+   // combatter is visible. Not listed to charts/tables
+   $('#card_combatter').children('.card_div').each(function(){
+     $(this).addClass('active');
+   })
  }
 
  function styleCheck(){
    // adjust bg height to scroll or window
    scrollPxCards = $('#tier_contents').height() + 'px';
    scrollPxStats = $('#statistics_contents').height() + 'px';
-   $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+',100vh');
+   scrollPxCombs = $('#combat_contents').height() + 'px';
+   $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+','+scrollPxCombs+',100vh');
  }
-
 
  // export tier data
  $('#btn_export').on('click', () => {
@@ -121,5 +125,4 @@ function fileChanged(input){
     localStorage.tiers = reader.result;
     location.reload(false);
   }
-  // reader.readAsText(input.files[0]);
 }
