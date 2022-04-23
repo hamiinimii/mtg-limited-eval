@@ -100,7 +100,8 @@ $('.checkall').change(function() {
    // adjust bg height to scroll or window
    scrollPxCards = $('#tier_contents').height() + 'px';
    scrollPxStats = $('#statistics_contents').height() + 'px';
-   $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+',100vh');
+   scrollPxCombs = $('#combat_contents').height() + 'px';
+   $('.bg').css('height','max('+scrollPxCards+','+scrollPxStats+','+scrollPxCombs+',100vh');
  }
 
 
