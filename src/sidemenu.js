@@ -89,6 +89,11 @@ $('.checkall').change(function() {
    // stat page
    generateChartsAndTables();
 
+   // combatter is visible. Not listed to charts/tables
+   $('#card_combatter').children('.card_div').each(function(){
+     $(this).addClass('active');
+   })
+
  }
 
  function styleCheck(){
@@ -121,5 +126,4 @@ function fileChanged(input){
     localStorage.tiers = reader.result;
     location.reload(false);
   }
-  // reader.readAsText(input.files[0]);
 }
