@@ -43,11 +43,11 @@ $('.btn_keyword').click(function() {
   let keyword = $(this).attr('id');
   if ($(this).hasClass('active')) { // on -> off
     $(this).removeClass('active');
-    $(this).find('img').attr('src',"img/icon_"+keyword+"_off.png");
+    $(this).find('img').attr('src',"img/combat/icon_"+keyword+"_off.png");
     modified_param.keywords[keyword] = false;
   } else { // off -> on. keyword == false or undefined
     $(this).addClass('active');
-    $(this).find('img').attr('src', "img/icon_"+keyword+".png");
+    $(this).find('img').attr('src', "img/combat/icon_"+keyword+".png");
     modified_param.keywords[keyword] = true;
   }
   if (combatter_id != ''){
@@ -60,10 +60,10 @@ $('.btn_keyword').click(function() {
 $('.btn_attackblock').click(function() {
   if ($(this).hasClass('attack')) {
     $(this).removeClass('attack');
-    $(this).html('<img src="img/icon_block.png" height ="25" width="25" alt="">Block');
+    $(this).html('<img src="img/combat/icon_block.png" height ="25" width="25" alt="">Block');
   } else {
     $(this).addClass('attack');
-    $(this).html('<img src="img/icon_attack.png" height ="25" width="25" alt="">Attack')
+    $(this).html('<img src="img/combat/icon_attack.png" height ="25" width="25" alt="">Attack')
   }
   if (combatter_id != ''){
     let modi_combatter = prepareCombat(combatter_id, modified_param);
@@ -86,7 +86,7 @@ $('.btn_closecombatter').click(function() {
     resetKwAndPT();
     resetCombatCards();
   }
-  $(this).find('img').attr('src', "img/icon_close_off.png");
+  $(this).find('img').attr('src', "img/combat/icon_close_off.png");
   updateCounts();
 })
 
@@ -99,7 +99,7 @@ function prepareCombat(card_id, modifi={pow:-1, tgh:-1, keywords:{}}) {
   $('#'+card_id).attr('data-combat', 'card_combatter');
   const combatter = new Creature(); // initialize combatter
   // enable close button
-  $('.btn_closecombatter').find('img').attr('src', "img/icon_close.png");
+  $('.btn_closecombatter').find('img').attr('src', "img/combat/icon_close.png");
 
   // Find creature face. First found is used.
   $('#'+card_id).children('a').each(function(i, o){ // fetch target card data
@@ -199,7 +199,7 @@ function resetKwAndPT() {
   $('.btn_keyword').each(function() {
     let keyword = $(this).attr('id');
     $(this).removeClass('active');
-    $(this).find('img').attr('src',"img/icon_"+keyword+"_off.png");
+    $(this).find('img').attr('src',"img/combat/icon_"+keyword+"_off.png");
     modified_param.keywords[keyword] = false;
   })
   $('#pow').val('0');

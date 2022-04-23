@@ -12,9 +12,16 @@ body {
 
 .area {
   border-radius: 20px 0px 0px 0px; /* 左上・右上・右下・左下 */
-  margin: 20px 0 0 0;
+  margin: 20px 0 0 15px;
   font-size: 1.5em;
   font-family: 'Oswald', sans-serif;
+}
+.area_rev {
+  border-radius: 0px 20px 0px 0px; /* 左上・右上・右下・左下 */
+  margin: 20px 15px 0 0;
+  font-size: 1.5em;
+  font-family: 'Oswald', sans-serif;
+  padding:10px;
 }
 
 .area_text{
@@ -151,13 +158,14 @@ body {
 }
 
 .chart_div {
+  margin: 15px 0 0 0;
   width: 50%;
   display: flex;
 }
 
 .combat_cards {
   display: grid;
-  column-gap: 15px;
+  /* column-gap: 15px; */
 }
 #area_combatter{
   grid-column: 1/7;
@@ -167,7 +175,7 @@ body {
   grid-column: 1/7;
   grid-row: 2/3;
   display: flex;
-  gap: 15px;
+  /* gap: 15px; */
 }
 #area_uncombat{
   grid-column: 1/6;
@@ -213,7 +221,7 @@ body {
 }
 
 .compares {
-  width: 100%;
+  width: calc(100% - 15px);
 }
 
 .conditions{
@@ -224,7 +232,7 @@ body {
   /* to keep tier area window size */
   width: 100%;
   margin: 50px 0 0 0;
-  padding: 0 0 0 15px;
+  /* padding: 0 0 0 15px; */
 }
 
 .headmenu{
@@ -299,4 +307,30 @@ body {
 
 .variations{
   display: none;
+}
+
+
+/* instant and mana */
+.available_mana{
+  margin: 20px 0 0 0;
+  display: flex;
+  gap: 25px;
+}
+.mana{
+  position: relative;
+  width: 75px;
+  height: 75px;
+  line-height: 100px;
+  background-color: green;
+  border-radius: 50%;
+  color: #fff;
+}
+.mana img{
+  position: absolute;               /* 2 */
+  top: 50%;                         /* 3 */
+  left: 50%;
+  transform: translate(0, -50%);  /* 4 */
+  -webkit-transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
 }

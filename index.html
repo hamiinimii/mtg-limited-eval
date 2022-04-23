@@ -27,6 +27,7 @@
       <div class="btn_pagename tiers active">Pick Tiers</div>
       <div class="btn_pagename statistics">Statistics</div>
       <div class="btn_pagename combat">Combat</div>
+      <div class="btn_pagename instant">Instant</div>
       <input type="text" id="setname" onclick="selectAll(this)" oninput="inputText()"></input>
     </div>
     <!-- side menu to change parameters -->
@@ -131,44 +132,44 @@
           <div class="combat_cards">
             <section class="area" id="area_combatter" style="background-color: rgba(205,95,100, 0.7); position:relative">
               <div class="btn_closecombatter">
-                <img src="img/icon_close_off.png" height ="17" width="17">
+                <img src="img/combat/icon_close_off.png" height ="17" width="17">
               </div>
               <p class="area_text_left">It can...</p>
               <div id="combat_this">
                 <div class="cards" id="card_combatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
                 <div class="btn_attackblock attack" id="combat_attackblock">
-                  <img src="img/icon_attack.png" height ="25" width="25" alt="">
+                  <img src="img/combat/icon_attack.png" height ="25" width="25" alt="">
                   Attack
                 </div>
                 <div id="combat_keywords1">
                   <div class="btn_keyword" id="deathtouch">
-                    <img src="img/icon_deathtouch_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_deathtouch_off.png" height ="25" width="25" alt="">
                     Deathtouch
                   </div>
                   <div class="btn_keyword" id="doublestrike">
-                    <img src="img/icon_doublestrike_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_doublestrike_off.png" height ="25" width="25" alt="">
                     Double strike
                   </div>
                   <div class="btn_keyword" id="firststrike">
-                    <img src="img/icon_firststrike_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_firststrike_off.png" height ="25" width="25" alt="">
                     First strike
                   </div>
                   <div class="btn_keyword" id="flying">
-                    <img src="img/icon_flying_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_flying_off.png" height ="25" width="25" alt="">
                     Flying
                   </div>
                 </div>
                 <div class="combat_keywords2">
                   <div class="btn_keyword" id="indestructible">
-                    <img src="img/icon_indestructible_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_indestructible_off.png" height ="25" width="25" alt="">
                     Indestructible
                   </div>
                   <div class="btn_keyword" id="infect">
-                    <img src="img/icon_infect_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_infect_off.png" height ="25" width="25" alt="">
                     Infect
                   </div>
                   <div class="btn_keyword" id="reach">
-                    <img src="img/icon_reach_off.png" height ="25" width="25" alt="">
+                    <img src="img/combat/icon_reach_off.png" height ="25" width="25" alt="">
                     Reach
                   </div>
                 </div>
@@ -201,11 +202,30 @@
             </section>
             <section class="area compares" id="area_setcombatter" style="background-color: rgba(120,100,100, 0.6)">
               <div style="margin:5px 0 0 5px;">
-                <img src="img/icon_combat.png" height ="25" width="25" alt="">
+                <img src="img/combat/icon_combat.png" height ="25" width="25" alt="">
               </div>
               <div class="cards" id="setcombatter" ondrop="drop(event,'combat')" ondragover="dragover(event)"></div>
             </section>
           </div>
+        </div>
+      </article>
+
+      <!-- area for instant action -->
+      <article id="instant_contents" class="instant tabarea">
+        <div class="contents">
+          <section class="area_rev" id="area_manas" style="background-color: rgba(120,140,120, 0.7)">
+            <div class="available_mana">
+              <div class="mana W"><img src="img/instant/icon_W.png"></div>
+              <div class="mana U"><img src="img/instant/icon_U.png"></div>
+              <div class="mana B"><img src="img/instant/icon_B.png"></div>
+              <div class="mana R"><img src="img/instant/icon_R.png"></div>
+              <div class="mana G"><img src="img/instant/icon_G.png"></div>
+            </div>
+          </section>
+          <section class="area" id="area_instant" style="background-color: rgba(225,199,127, 0.7)">
+            <p class="area_text">Instant action</p>
+            <div class="cards" id="cards_instant"></div>
+          </section>
         </div>
       </article>
 
