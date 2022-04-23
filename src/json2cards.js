@@ -1,16 +1,25 @@
-let cards_tier = {};
 
-function loadTier(){
-  if (localStorage.getItem(current_set)!=null){
-    return JSON.parse(localStorage.getItem(current_set));
+
+function loadTier(setname){
+  if (localStorage.getItem('tiers')!=null){
+    const json_tiers = JSON.parse(localStorage.getItem('tiers'));
+    // check setname existence
+    if (!(setname in json_tiers)) {
+      json_tiers[setname] = {};
+    }
+    return json_tiers;
   }else{
-    return {};
+    // check setname existence
+    if (!(setname in cards_tier)) {
+      cards_tier[setname] = {};
+    }
+    return cards_tier;
   }
 }
 
 function saveTier(object){
   let tiers = JSON.stringify(object);
-  localStorage.setItem(current_set, tiers);
+  localStorage.setItem('tiers', tiers);
 }
 
 function jsonToCards(cardJson){
@@ -28,26 +37,10 @@ function jsonToCards(cardJson){
   const combatElement = document.querySelector('#card_combatter');
 
   // clear cards when set is changed
-  for (let i=0; i<tierElements.length; i++){
-    let elm = tierElements[i];
-    while(elm.lastChild){
-      elm.removeChild(elm.lastChild);
-    }
-  }
-  while(uncombatElements.lastChild){
-    while(uncombatElements.lastChild){
-      uncombatElements.removeChild(uncombatElements.lastChild);
-    }
-  }
-  while(combatElement.lastChild){
-    combatElement.removeChild(combatElement.lastChild);
-  }
-
-
-
+  $('div.card_div').remove();
 
   // load tier from localStorage
-  cards_tier = loadTier();
+  cards_tier = loadTier(current_set);
 
   //store data for cards
   let backfaces = {};
@@ -130,13 +123,13 @@ function jsonToCards(cardJson){
     divCardElement.appendChild(hrefImgElement);
 
     // check and register tier
-    if (!(card.uuid in cards_tier)){
-      cards_tier[card.uuid] = '0';
+    if (!(card.uuid in cards_tier[current_set])){
+      cards_tier[current_set][card.uuid] = '0';
     }
-    divCardElement.dataset.tier = cards_tier[card.uuid];
+    divCardElement.dataset.tier = cards_tier[current_set][card.uuid];
     divCardElement.dataset.combat = 'unchanged';
     // place card at specified tier
-    const tier_int = parseInt(cards_tier[card.uuid]);
+    const tier_int = parseInt(cards_tier[current_set][card.uuid]);
     tierElements[tier_int].appendChild(divCardElement);
 
   }
