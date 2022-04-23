@@ -1,3 +1,5 @@
+let current_tab = 'tiers';
+
 function activateDefaultTab(tabname){
   $('.btn_pagename.'+tabname).click();
 }
@@ -19,7 +21,7 @@ $('.btn_pagename').click(function() {
     }
   })
 
-  if (current_tab!=target_area) { // run only if other tab than current is selected
+  // if (current_tab!=target_area) { // run only if other tab than current is selected
     current_tab=target_area;
     // move cards to activated tabarea
     $('.card_div').each(function(i, o){
@@ -35,7 +37,7 @@ $('.btn_pagename').click(function() {
     })
 
     styleCheck(); // なぜ縦幅がかわらんのかまったくわからん
-  }
+  // }
 });
 
 

@@ -13,8 +13,9 @@ function drop(event, tab){
     // drop
     event.currentTarget.appendChild(drag_elm);
     // save tier
-    cards_tier[dragged_id] = event.currentTarget.id.slice(-1);
-    drag_elm.dataset.tier = cards_tier[dragged_id];
+    console.log(cards_tier);
+    cards_tier[current_set][dragged_id] = event.currentTarget.id.slice(-1);
+    drag_elm.dataset.tier = cards_tier[current_set][dragged_id];
     saveTier(cards_tier);
   } else if (tab=='combat') {
     // drop to combatter

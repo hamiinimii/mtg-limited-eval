@@ -20,7 +20,7 @@ class Creature {
       enemy.dead = 1; // enemy toughness <= 0
     } else if (enemy.T+enemy.gets[1]-enemy.damage<=0 && !enemy.keywords.indestructible) {
       enemy.dead = 1; // enemy was dealt damage greater than its tougness
-    } else if (enemy.damage>=1 && this.keywords.deathtouch) {
+    } else if (enemy.damage>=1 && this.keywords.deathtouch && !enemy.keywords.indestructible) {
       enemy.dead = 1; // deathtouch
     }
     // return enemy.dead;
@@ -42,12 +42,11 @@ const kw_dict = {
 // keyword buttons
 $('.btn_keyword').click(function() {
   let keyword = $(this).attr('id');
-  // if (combatter.keywords[keyword]==true) { // on -> off
   if ($(this).hasClass('active')) { // on -> off
     $(this).removeClass('active');
     $(this).find('img').attr('src',"img/icon_"+keyword+"_off.png");
     modified_param.keywords[keyword] = false;
-  } else { // off -> on. keyword == 0 or undefined
+  } else { // off -> on. keyword == false or undefined
     $(this).addClass('active');
     $(this).find('img').attr('src', "img/icon_"+keyword+".png");
     modified_param.keywords[keyword] = true;
@@ -62,11 +61,9 @@ $('.btn_keyword').click(function() {
 $('.btn_attackblock').click(function() {
   if ($(this).hasClass('attack')) {
     $(this).removeClass('attack');
-    // $(this).find('img').attr('src',"img/icon_block.png");
     $(this).html('<img src="img/icon_block.png" height ="25" width="25" alt="">Block');
   } else {
     $(this).addClass('attack');
-    // $(this).find('img').attr('src',"img/icon_attack.png");
     $(this).html('<img src="img/icon_attack.png" height ="25" width="25" alt="">Attack')
   }
   if (combatter_id != ''){
@@ -84,8 +81,6 @@ $('.input_cardparam').change(function() {
 
 // close combatter
 $('.btn_closecombatter').click(function() {
-  console.log('btn_closecombatter pushed');
-  console.log(typeof combatter_id);
   if (combatter_id != '') {
     $('#'+combatter_id).appendTo('#unchanged');
     combatter_id = "";
@@ -164,10 +159,8 @@ function doCombat(combatter) {
         // flier cannot be blocked except for by fliers or reachers
         if (($('.btn_attackblock').hasClass('attack') && combatter.keywords.flying && !(combatted.keywords.flying || combatted.keywords.reach)) // attacking and flying
          || !($('.btn_attackblock').hasClass('attack')) && !(combatter.keywords.flying || combatter.keywords.reach) && combatted.keywords.flying) { // blocking and enemy is flying
-        // if ($('.btn_attackblock').hasClass('attack')) {
-          console.log("cannot block flier");
           $(p).appendTo('#unchanged');
-          $(p).attr('data-combat', '#unchanged');
+          $(p).attr('data-combat', 'unchanged');
           return false;
         }
         // reset combatter state
@@ -209,7 +202,6 @@ function resetKwAndPT() {
 function resetCombatCards() {
   $('.card_div').each(function(i, o){
     $(o).children('a').each(function(j, q){
-      // const this_combat = '#' + $(o).attr('data-combat');
       if ($(q).attr('data-c_types').includes('Creature')) $(o).appendTo('#unchanged');
     })
   })

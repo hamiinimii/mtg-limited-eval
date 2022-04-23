@@ -2,8 +2,7 @@
 let gTimer;
 let set_list; // set list used grobally
 let current_set = 'SNC';
-// let current_tab = 'tiers';
-let current_tab = 'tiers';
+let cards_tier = {};
 
 function selectAll(target){
   target.select();
@@ -43,7 +42,10 @@ function inputEnd(){
 }
 
 // request json
-function refreshSet(set){
+function refreshSet(setname){
+  let objn = {bye:{uye: '34'}};
+  // console.log(objn['bye']['uye']);
+
   // validate setname
   if (!set_list) {
     set_list = {};
@@ -67,7 +69,9 @@ function refreshSet(set){
     }
   }
 
-  let requestURL = 'https://mtgjson.com/api/v5/'+set+'.json';
+
+
+  const requestURL = 'https://mtgjson.com/api/v5/'+setname+'.json';
 
   let request = new XMLHttpRequest();
   request.open('GET', requestURL);
@@ -79,6 +83,8 @@ function refreshSet(set){
     jsonToCards(cardJson);
     filterChange();
     activateDefaultTab(current_tab);
+    $('.btn_closecombatter').click();
+
 
     styleCheck();
   }
