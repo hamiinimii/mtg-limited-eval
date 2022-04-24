@@ -213,17 +213,19 @@
       <!-- area for instant action -->
       <article id="instant_contents" class="instant tabarea">
         <div class="contents">
-          <section class="area_rev" id="area_manas" style="background-color: rgba(120,140,120, 0.7)">
+          <section class="area_rev" id="area_manas" style="background-color: rgba(190,200,190, 0.7)">
+            <p class="area_text">Choose floating mana value and available colors</p>
             <div class="available_mana">
-              <div class="mana W"><img src="img/instant/icon_W.png"></div>
-              <div class="mana U"><img src="img/instant/icon_U.png"></div>
-              <div class="mana B"><img src="img/instant/icon_B.png"></div>
-              <div class="mana R"><img src="img/instant/icon_R.png"></div>
-              <div class="mana G"><img src="img/instant/icon_G.png"></div>
+              <div><input type="number" class="input_manavalue" id="manavalue" min="0" value="0"></div>
+              <div class="btn_mana" id="W"><img src="img/instant/icon_W_off.png"></div>
+              <div class="btn_mana" id="U"><img src="img/instant/icon_U_off.png"></div>
+              <div class="btn_mana" id="B"><img src="img/instant/icon_B_off.png"></div>
+              <div class="btn_mana" id="R"><img src="img/instant/icon_R_off.png"></div>
+              <div class="btn_mana" id="G"><img src="img/instant/icon_G_off.png"></div>
             </div>
           </section>
           <section class="area" id="area_instant" style="background-color: rgba(225,199,127, 0.7)">
-            <p class="area_text">Instant action</p>
+            <p class="area_text_left">Opponent instant action from hidden zone</p>
             <div class="cards" id="cards_instant"></div>
           </section>
         </div>
@@ -236,6 +238,7 @@
       <script type="text/javascript" src="./src/statcharts.js"></script>
       <script type="text/javascript" src="./src/setmanager.js"></script>
       <script type="text/javascript" src="./src/combat.js"></script>
+      <script type="text/javascript" src="./src/instantaction.js"></script>
       <script type="text/javascript">
         $('input#setname').val(current_set);
         refreshSet(current_set);

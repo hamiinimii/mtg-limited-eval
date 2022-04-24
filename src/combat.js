@@ -40,7 +40,7 @@ const kw_dict = {
 
 // keyword buttons
 $('.btn_keyword').click(function() {
-  let keyword = $(this).attr('id');
+  const keyword = $(this).attr('id');
   if ($(this).hasClass('active')) { // on -> off
     $(this).removeClass('active');
     $(this).find('img').attr('src',"img/combat/icon_"+keyword+"_off.png");

@@ -1,7 +1,7 @@
 // referred from https://webparts.cman.jp/input/inputend/
 let gTimer;
 let set_list; // set list used grobally
-let current_set = 'SNC';
+let current_set = 'VOW';
 let cards_tier = {};
 
 function selectAll(target){

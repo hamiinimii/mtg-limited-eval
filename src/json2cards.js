@@ -1,5 +1,3 @@
-
-
 function loadTier(setname){
   if (localStorage.getItem('tiers')!=null){
     const json_tiers = JSON.parse(localStorage.getItem('tiers'));
@@ -22,6 +20,7 @@ function saveTier(object){
   localStorage.setItem('tiers', tiers);
 }
 
+// main process to generate cards from json
 function jsonToCards(cardJson){
 
   const tierElements = [
@@ -71,7 +70,7 @@ function jsonToCards(cardJson){
     if (card.name.startsWith('A-')) continue;
 
     // restore data of back face of double faced cards
-    if (card.layout=='transform') {
+    if (card.layout=='transform' || card.layout=='modal_dfc') {
       if (card.side === 'b') {
         backfaces[card.uuid] = {
           otherFaceIds: card.otherFaceIds,
@@ -80,6 +79,7 @@ function jsonToCards(cardJson){
           types: card.types,
           keywords: card.keywords
         };
+        if (!flag_var) backfaces[card.uuid]['instant'] = findInstantAction(card); // see instantaction.js
         if (card.power) backfaces[card.uuid]['power']=card.power;
         if (card.toughness) backfaces[card.uuid]['toughness']=card.toughness;
         continue;
@@ -110,11 +110,11 @@ function jsonToCards(cardJson){
       hrefImgElement.dataset.c_color = card.colors.length ? card.colors : ['N']; // colorless card has N
       hrefImgElement.dataset.c_rarity = card.rarity;
       hrefImgElement.dataset.c_types = card.types;
-      // hrefImgElement.dataset.c_keywords = card.keywords ? card.keywords : "noKeywords";
       hrefImgElement.dataset.c_keywords = card.keywords;
       // pt does not refer back side now
       if (card.power) hrefImgElement.dataset.c_power = card.power;
       if (card.toughness) hrefImgElement.dataset.c_toughness = card.toughness;
+      if (!flag_var) hrefImgElement.dataset.instant = findInstantAction(card); // see instantaction.js
     }else{
       divCardElement.className = 'card_div_var';
     }
@@ -136,7 +136,6 @@ function jsonToCards(cardJson){
 
   // make elements for backface of transform cards
   for (let [id, data] of Object.entries(backfaces)) {
-    // let back_id = id;
     let face_id = data.otherFaceIds.at(0);
     const hrefImgElement = document.createElement('a');
     hrefImgElement.href = 'https://api.scryfall.com/cards/' + data.scryfallId + '?format=image&face=back';
@@ -147,6 +146,7 @@ function jsonToCards(cardJson){
     hrefImgElement.dataset.c_toughness = data.toughness;
     hrefImgElement.dataset.c_types = data.types;
     hrefImgElement.dataset.c_face = 'back';
+    hrefImgElement.dataset.instant = data.instant;
     let elm = document.getElementById(face_id);
     elm.appendChild(hrefImgElement);
   }

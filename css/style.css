@@ -21,7 +21,7 @@ body {
   margin: 20px 15px 0 0;
   font-size: 1.5em;
   font-family: 'Oswald', sans-serif;
-  padding:10px;
+  padding:0 20px 10px 20px;
 }
 
 .area_text{
@@ -243,9 +243,10 @@ body {
 }
 
 .input_cardparam{
+  text-align: right;
   font-family: 'Cardo', serif;
   font-size: 1.3em;
-  width: 1.6em;
+  width: 1.5em;
 }
 
 #setname{
@@ -312,25 +313,49 @@ body {
 
 /* instant and mana */
 .available_mana{
-  margin: 20px 0 0 0;
+  /* margin: 20px 0 0 0; */
   display: flex;
   gap: 25px;
 }
-.mana{
+.btn_mana{
+  top: 0;
+  bottom: 0;
+  margin: auto 0 auto 0;
   position: relative;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   line-height: 100px;
-  background-color: green;
+  background-color: rgba(170,170,160,1);
   border-radius: 50%;
-  color: #fff;
 }
-.mana img{
-  position: absolute;               /* 2 */
-  top: 50%;                         /* 3 */
+.btn_mana img{
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(0, -50%);  /* 4 */
+  transform: translate(0, -50%);
   -webkit-transform: translate(-50%, -50%);
   width: 85%;
   height: 85%;
+}
+.btn_mana.active#W{
+  background-color: rgba(210,200,150,1);
+}
+.btn_mana.active#U{
+  background-color: rgba(160,190,205,1);
+}
+.btn_mana.active#B{
+  background-color: rgba(150,150,160,1);
+}
+.btn_mana.active#R{
+  background-color: rgba(190,125,110,1);
+}
+.btn_mana.active#G{
+  background-color: rgba(105,160,125,1);
+}
+.input_manavalue{
+  vertical-align: middle;
+  text-align: right;
+  font-family: 'Cardo', serif;
+  font-size: 2em;
+  width: 1.4em;
 }
